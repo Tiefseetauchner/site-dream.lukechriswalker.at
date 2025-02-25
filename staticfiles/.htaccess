@@ -1,0 +1,26 @@
+<IfModule mod_headers.c>
+    Header always set Access-Control-Allow-Origin: "*"
+    Header always set Access-Control-Allow-Methods: "GET,POST,OPTIONS,DELETE,PUT"
+    Header always set Access-Control-Allow-Headers "*"
+</IfModule>
+
+RewriteEngine on
+
+# Keep existing admin redirect
+RewriteCond %{REQUEST_URI} ^/admin
+RewriteRule ^(.*)$ /admin/$1 [L]
+
+# Redirect sitemap requests to sitemap.php
+# Uses the SiteMapper plugin at https://github.com/Tiefseetauchner/cockpit-cms-sitemapper
+#RewriteCond %{REQUEST_URI} ^/sitemap.xml
+#RewriteRule ^(.*)$ /sitemap.php [L]
+
+# Detect bots and serve prerendered content if available
+RewriteCond %{HTTP_USER_AGENT} (googlebot|bingbot|yandex|baiduspider|duckduckbot|slurp|facebot|facebookexternalhit|twitterbot|discordbot|linkedinbot|telegrambot|whatsapp|slackbot|applebot|semrushbot|ahrefsbot|mj12bot|seznambot|gptbot|coccocbot|sogou) [NC]
+RewriteCond %{REQUEST_URI} !^/prerendered/
+RewriteRule ^(.*)$ /prerendered/%{REQUEST_URI}/index.html [L]
+
+# Default rule to serve index.html for SPA navigation
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-ad
+RewriteRule ^(.*)$ /index.html?path=$1 [NC,L,QSA]

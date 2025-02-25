@@ -1,0 +1,22 @@
+{
+  "name": "clientapp",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "openapi-ts": "openapi-ts -i openapi.yml -o src/client"
+  },
+  "dependencies": {
+    "preact": "^10.26.2"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.10.1",
+    "@hey-api/openapi-ts": "^0.48.3",
+    "typescript": "~5.7.2",
+    "playwright": "^1.50.1",
+    "vite": "^6.2.0"
+  }
+}

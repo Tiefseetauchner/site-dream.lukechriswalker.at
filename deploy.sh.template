@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# Get Parameters
+info() {
+    echo "Deploys the app to the production server"
+
+    usage
+}
+
+usage() {
+    echo "usage: deploy-prod.sh [options]
+
+-a        include admin files
+-c        include clientapp
+-s        include static files
+-h        Show this help"
+}
+
+PARAMETERS_TO_PASS=""
+
+while getopts "achs" opt; do
+  case $opt in
+    a)
+      PARAMETERS_TO_PASS="$PARAMETERS_TO_PASS -a"
+      ;;
+    c)
+      PARAMETERS_TO_PASS="$PARAMETERS_TO_PASS -c"
+      ;;
+    s)
+      PARAMETERS_TO_PASS="$PARAMETERS_TO_PASS -s"
+      ;;
+    h)
+      info
+      exit 0
+      ;;
+    \?)
+      echo "Use -h for help"
+      exit 1
+      ;;
+    esac
+done
+
+if [ "$PARAMETERS_TO_PASS" == "" ]; then
+  PARAMETERS_TO_PASS="-a -c -s"
+fi
+
+# Get current folder path
+FOLDER_PATH=$(pwd)
+
+# Build and package
+$FOLDER_PATH/package.sh $PARAMETERS_TO_PASS
+
+# REMOVE THESE LINES
+echo -e "TODO: choose your build server and enter it below"
+exit 1
+
+# Copy files to server
+# TODO: choose your build server and enter it below. Then uncomment this line
+# rsync -avz $FOLDER_PATH/build/ <SERVER>:<DIRECTORY>
