@@ -6,15 +6,7 @@ import path from "path";
 const BASE_URL = "http://localhost:5173"; // Default Vite port
 const OUTPUT_DIR = "./prerendered";
 const visitedPages = new Set();
-const queue = [
-  "/",
-  "/projects",
-  "/about",
-  "/blogs",
-  "/gallery/photography",
-  "/gallery/blender",
-  "/links",
-];
+const queue = ["/"];
 
 async function startVite() {
   return new Promise((resolve) => {
