@@ -1,2 +1,4 @@
 deploy*.sh
 build/
+node_modules/
+.turbo/
