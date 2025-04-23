@@ -6,7 +6,8 @@
   },
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo run dev"
+    "dev": "turbo run dev",
+    "generate-api": "cd backend/ && strapi generate"
   },
   "packageManager": "bun@1.2.10",
   "workspaces": [
