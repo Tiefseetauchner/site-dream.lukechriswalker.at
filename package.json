@@ -15,6 +15,9 @@
   ],
   "trustedDependencies": [
     "@swc/core",
-    "core-js-pure"
+    "better-sqlite3",
+    "core-js-pure",
+    "esbuild",
+    "sharp"
   ]
 }
