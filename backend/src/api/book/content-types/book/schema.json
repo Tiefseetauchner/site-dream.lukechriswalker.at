@@ -4,7 +4,8 @@
   "info": {
     "singularName": "book",
     "pluralName": "books",
-    "displayName": "Book"
+    "displayName": "Book",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,6 +13,13 @@
   "attributes": {
     "title": {
       "type": "string"
+    },
+    "cover_image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

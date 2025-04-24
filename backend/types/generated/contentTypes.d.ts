@@ -372,6 +372,7 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
 export interface ApiBookBook extends Struct.CollectionTypeSchema {
   collectionName: 'books';
   info: {
+    description: '';
     displayName: 'Book';
     pluralName: 'books';
     singularName: 'book';
@@ -380,6 +381,7 @@ export interface ApiBookBook extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    cover_image: Schema.Attribute.Media<'images'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
