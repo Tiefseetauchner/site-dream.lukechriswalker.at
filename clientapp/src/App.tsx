@@ -1,10 +1,13 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "./utils/routes";
+import { PageTitleProvider } from "./components/PageTitleProvider";
 
 function App() {
   return (
     <>
-      <RouterProvider router={router}></RouterProvider>
+      <PageTitleProvider>
+        <RouterProvider router={router}></RouterProvider>
+      </PageTitleProvider>
     </>
   );
 }

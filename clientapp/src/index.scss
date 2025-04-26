@@ -177,4 +177,8 @@ $font-family-base: "Cormorant Infant", serif;
 $headings-font-family: "Cormorant Garamond", serif;
 $font-size-base: 1.5rem;
 
+:root {
+  --swiper-theme-color: #9a8d3b !important;
+}
+
 @import "bootstrap/scss/bootstrap";

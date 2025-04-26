@@ -1,7 +1,14 @@
-import { Col, Container, Nav, Navbar, Row } from "react-bootstrap";
-import { Outlet } from "react-router-dom";
+import { faBars, faFeather } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Row, Navbar, Nav } from "react-bootstrap";
+import { Link, Outlet } from "react-router-dom";
+import { routes } from "../utils/routes";
+import styles from "./Shared.module.scss";
+import { usePageTitle } from "./PageTitleContext";
 
 export function Layout() {
+  const { pageTitle } = usePageTitle();
+
   return (
     <div
       style={{
@@ -13,20 +20,131 @@ export function Layout() {
         justifyContent: "center",
       }}
     >
-      <div
-        style={{
-          height: "calc(100vh - 90px)",
-          width: "calc(100vw - 90px)",
-          padding: "45px",
-          backgroundColor: "#131016",
-          backgroundImage: "url('/background.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          borderRadius: "40px",
-          overflow: "hidden",
-        }}
-      >
+      <div className={styles.mainContainer}>
+        <Row
+          style={{
+            marginBottom: "60px",
+            marginTop: "10px",
+            position: "relative",
+          }}
+        >
+          <Navbar expand="lg">
+            <div
+              style={{
+                position: "relative",
+                display: "flex",
+                flexWrap: "wrap",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding:
+                  "var(--bs-navbar-padding-y) var(--bs-navbar-padding-x)",
+                flexShrink: "0",
+                width: "100%",
+                maxWidth: "100%",
+              }}
+            >
+              <Link
+                to={routes.home}
+                className="text-decoration-none"
+                style={{
+                  position: "absolute",
+                  left: "0",
+                }}
+              >
+                <Navbar.Brand>
+                  <img src="/logo.png" alt="Logo" style={{ width: "50px" }} />
+                </Navbar.Brand>
+              </Link>
+              <Link
+                to={routes.contact}
+                className="text-decoration-none"
+                style={{
+                  position: "absolute",
+                  right: "0",
+                }}
+              >
+                <Navbar.Brand>
+                  <FontAwesomeIcon
+                    icon={faFeather}
+                    color={"#9a8d3b"}
+                    style={{ width: "50px" }}
+                  />
+                </Navbar.Brand>
+              </Link>
+              <Navbar.Toggle
+                aria-controls="basic-navbar-nav"
+                style={{
+                  position: "absolute",
+                  right: "55px",
+                }}
+              >
+                <FontAwesomeIcon icon={faBars} color={"#9a8d3b"} />
+              </Navbar.Toggle>
+              <Nav
+                className="gap-3 d-none d-lg-flex"
+                style={{ position: "absolute", left: "90px" }}
+              >
+                <Nav.Item>
+                  <Link to={routes.home} className="text-decoration-none">
+                    <span className={styles.text}>Home</span>
+                  </Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Link to={routes.books} className="text-decoration-none">
+                    <span className={styles.text}>Books</span>
+                  </Link>
+                </Nav.Item>
+              </Nav>
+              <h1
+                className={`${styles.title} position-absolute start-50 translate-middle-x`}
+              >
+                {pageTitle}
+              </h1>
+              <Nav
+                className="gap-3 d-none d-lg-flex"
+                style={{ position: "absolute", right: "90px" }}
+              >
+                <Nav.Item>
+                  <Link to={routes.home} className="text-decoration-none">
+                    <span className={styles.text}>Characters</span>
+                  </Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Link to={routes.home} className="text-decoration-none">
+                    <span className={styles.text}>Author</span>
+                  </Link>
+                </Nav.Item>
+              </Nav>
+            </div>
+            <Navbar.Collapse
+              id="basic-navbar-nav"
+              style={{ paddingTop: "50px" }}
+            >
+              <Nav className="d-lg-none">
+                <Nav.Item>
+                  <Link to={routes.home} className="text-decoration-none">
+                    <span className={styles.text}>Home</span>
+                  </Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Link to={routes.books} className="text-decoration-none">
+                    <span className={styles.text}>Books</span>
+                  </Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Link to={routes.home} className="text-decoration-none">
+                    <span className={styles.text}>Characters</span>
+                  </Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Link to={routes.home} className="text-decoration-none">
+                    <span className={styles.text}>Author</span>
+                  </Link>
+                </Nav.Item>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+        </Row>
         <Outlet />
       </div>
     </div>

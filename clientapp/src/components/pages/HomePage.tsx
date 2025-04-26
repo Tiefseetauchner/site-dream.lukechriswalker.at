@@ -1,50 +1,30 @@
-import { Col, Container, DropdownDivider, Image, Row } from "react-bootstrap";
-import styles from "./HomePage.module.scss";
+import { Container, Row, Col } from "react-bootstrap";
+import { usePageTitle } from "../PageTitleContext";
 
 export function HomePage() {
+  const { setPageTitle } = usePageTitle();
+  setPageTitle("Home");
+
   return (
-    <div
-      style={{
-        width: "100%",
-        height: "100%",
-      }}
-      className={styles.container}
-    >
+    <>
       <Container>
-        <span className={styles.title}>
-          <h1>Dreams</h1>
-        </span>
-      </Container>
-      <Container>
-        <Row>
-          <Col className="text-center" xs={12} md={6}>
-            <h2>Dream</h2>
-            <Image src={"/dream.jpg"} className={styles.coverImg} />
-            <p>
+        <Row className="align-items-center py-3">
+          <Col xs={12} className="text-center">
+            <h4>
               <em>
-                In submission, We find safety.
-                <br />
-                In obedience, We find freedom.
-                <br />
-                In love, We find each other.
+                Not all dreams are gentle. Some cut deep. Some teach you who you
+                are.
               </em>
-            </p>
-          </Col>
-          <Col className="text-center" xs={12} md={6}>
-            <h2>Reality</h2>
-            <Image src={"/reality.jpg"} className={styles.coverImg} />
-            <p>
-              <em>
-                In submission, We find safety.
-                <br />
-                In obedience, We find freedom.
-                <br />
-                In love, We find each other.
-              </em>
-            </p>
+            </h4>
           </Col>
         </Row>
+        <Row className="py-3">
+          <Col md={12} lg={6}>
+            {/* <BlocksRenderer content={} /> */}
+          </Col>
+          <Col md={6}></Col>
+        </Row>
       </Container>
-    </div>
+    </>
   );
 }
