@@ -5,6 +5,9 @@ import { client } from "../../../strapiClient";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { usePageTitle } from "../../PageTitleContext";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 export function BooksOverviewPage() {
   const { setPageTitle } = usePageTitle();
