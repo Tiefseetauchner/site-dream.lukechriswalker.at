@@ -139,6 +139,11 @@ export interface CollectionTypeResponse<
   meta: any;
 }
 
+export interface SingleTypeResponse<TContentTypeUID extends UID.ContentType> {
+  data: GetValues<TContentTypeUID>;
+  meta: any;
+}
+
 // TEST
 // declare function fetch<T extends UID.ContentType>(uid: T): Promise<Response<T>>;
 // fetch("api::book.book").then((r) => r.data.attributes.content);

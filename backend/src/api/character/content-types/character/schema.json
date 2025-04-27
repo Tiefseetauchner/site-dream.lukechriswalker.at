@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "authors",
+  "collectionName": "characters",
   "info": {
-    "singularName": "author",
-    "pluralName": "authors",
-    "displayName": "Author",
+    "singularName": "character",
+    "pluralName": "characters",
+    "displayName": "Character",
     "description": ""
   },
   "options": {
@@ -15,14 +15,13 @@
       "type": "string"
     },
     "slug": {
-      "type": "uid",
-      "targetField": "name"
+      "type": "uid"
     },
-    "books": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::book.book",
-      "mappedBy": "authors"
+    "birthday": {
+      "type": "date"
+    },
+    "description": {
+      "type": "blocks"
     },
     "profile_picture": {
       "type": "media",
@@ -35,8 +34,11 @@
         "audios"
       ]
     },
-    "description": {
-      "type": "blocks"
+    "books": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::book.book",
+      "mappedBy": "characters"
     },
     "blurb": {
       "type": "string"

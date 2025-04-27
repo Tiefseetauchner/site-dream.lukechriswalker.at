@@ -105,12 +105,12 @@ export function Layout() {
                 style={{ position: "absolute", right: "90px" }}
               >
                 <Nav.Item>
-                  <Link to={routes.home} className="text-decoration-none">
+                  <Link to={routes.characters} className="text-decoration-none">
                     <span className={styles.text}>Characters</span>
                   </Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Link to={routes.home} className="text-decoration-none">
+                  <Link to={routes.mainAuthor} className="text-decoration-none">
                     <span className={styles.text}>Author</span>
                   </Link>
                 </Nav.Item>
@@ -132,12 +132,12 @@ export function Layout() {
                   </Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Link to={routes.home} className="text-decoration-none">
+                  <Link to={routes.characters} className="text-decoration-none">
                     <span className={styles.text}>Characters</span>
                   </Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Link to={routes.home} className="text-decoration-none">
+                  <Link to={routes.mainAuthor} className="text-decoration-none">
                     <span className={styles.text}>Author</span>
                   </Link>
                 </Nav.Item>

@@ -1,0 +1,24 @@
+.characterName {
+  font-weight: bold;
+  font-size: 2rem;
+  font-family: "Cormorant SC", serif;
+}
+
+.characterBirthday {
+  @media screen and (max-width: 768px) {
+    display: block;
+    padding-left: 0;
+  }
+
+  display: inline;
+  padding-left: 24px;
+  font-style: italic;
+}
+
+.characterBlurb {
+  font-size: 1.2rem;
+  font-style: italic;
+  padding: 5px 0 5px 12px;
+  margin: 10px 0;
+  border-left: 1px solid #9a8d3b;
+}

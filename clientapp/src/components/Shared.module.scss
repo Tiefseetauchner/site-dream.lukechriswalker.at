@@ -10,11 +10,20 @@ span.text {
   text-shadow: 4px 4px 10px #000;
 }
 
+blockquote {
+  color: #d7c970;
+  text-shadow: 4px 4px 10px #000;
+}
+
 .title {
   text-align: center;
 
   font-size: 6rem;
   @media screen and (max-width: 768px) {
+    font-size: 2rem;
+  }
+
+  @media screen and (max-width: 1200px) {
     font-size: 3rem;
   }
 
@@ -40,4 +49,8 @@ span.text {
   background-repeat: no-repeat;
   overflow: auto;
   position: relative;
+}
+
+a {
+  text-decoration: underline #9a8d3b;
 }

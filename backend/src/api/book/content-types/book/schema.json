@@ -39,6 +39,18 @@
     },
     "description": {
       "type": "blocks"
+    },
+    "content_warnings": {
+      "type": "text"
+    },
+    "order": {
+      "type": "integer"
+    },
+    "characters": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::character.character",
+      "inversedBy": "books"
     }
   }
 }

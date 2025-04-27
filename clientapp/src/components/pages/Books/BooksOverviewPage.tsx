@@ -8,6 +8,7 @@ import { usePageTitle } from "../../PageTitleContext";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { Link } from "react-router-dom";
 
 export function BooksOverviewPage() {
   const { setPageTitle } = usePageTitle();
@@ -21,9 +22,8 @@ export function BooksOverviewPage() {
       const data = (await client.collection("books").find({
         status: "published",
         populate: ["cover_image", "authors"],
+        sort: ["order"],
       })) as unknown as CollectionTypeResponse<"api::book.book">;
-
-      console.log(data);
 
       setBooks(data);
     }
@@ -59,24 +59,26 @@ export function BooksOverviewPage() {
       >
         {books?.data.map((book) => (
           <SwiperSlide style={{ overflow: "auto" }}>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100%",
-                overflow: "auto",
-              }}
-            >
-              <img
+            <Link to={`/books/${book.slug}`}>
+              <div
                 style={{
-                  maxWidth: "100%",
-                  maxHeight: "60vh",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "100%",
+                  overflow: "auto",
                 }}
-                src={book.cover_image.url}
-                alt={book.cover_image.alternativeText}
-              />
-            </div>
+              >
+                <img
+                  style={{
+                    maxWidth: "100%",
+                    maxHeight: "60vh",
+                  }}
+                  src={book.cover_image.url}
+                  alt={book.cover_image.alternativeText}
+                />
+              </div>
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>
