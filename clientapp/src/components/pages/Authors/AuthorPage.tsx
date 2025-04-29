@@ -68,6 +68,7 @@ export function AuthorPage() {
             </p>
           </Col>
           <Col sm={12} md={9}>
+            <h2>{author?.data[0].name}</h2>
             {author?.data[0].description && (
               <BlocksRenderer content={author.data[0].description} />
             )}

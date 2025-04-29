@@ -7,6 +7,10 @@ import { BooksDetailsPage } from "../components/pages/Books/BooksDetailsPage";
 import { CharactersOverviewPage } from "../components/pages/Characters/CharactersOverviewPage";
 import { CharactersDetailsPage } from "../components/pages/Characters/CharactersDetailsPage";
 import { AuthorPage } from "../components/pages/Authors/AuthorPage";
+import { ContactPage } from "../components/pages/ContactPage";
+import { LicensePage } from "../components/pages/LicensePage";
+import { PrivacyPage } from "../components/pages/PrivacyPage";
+import { ImprintPage } from "../components/pages/ImprintPage";
 
 export const routes = {
   home: "/",
@@ -17,6 +21,9 @@ export const routes = {
   mainAuthor: "/authors/lena-tauchner",
   author: (id: string) => `/authors/${id}`,
   contact: "/contact",
+  imprint: "/imprint",
+  license: "/license",
+  privacy: "/privacy",
 };
 
 export const router: ReturnType<typeof createBrowserRouter> =
@@ -49,6 +56,22 @@ export const router: ReturnType<typeof createBrowserRouter> =
         {
           path: routes.author(":id"),
           Component: AuthorPage,
+        },
+        {
+          path: routes.contact,
+          Component: ContactPage,
+        },
+        {
+          path: routes.imprint,
+          Component: ImprintPage,
+        },
+        {
+          path: routes.license,
+          Component: LicensePage,
+        },
+        {
+          path: routes.privacy,
+          Component: PrivacyPage,
         },
       ],
     },

@@ -5,7 +5,7 @@ import { client } from "../../../strapiClient";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { useParams } from "react-router-dom";
 import moment from "moment";
-import { Col, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import characterStyles from "./CharactersDetailPage.module.scss";
 import styles from "../../Shared.module.scss";
 
@@ -36,7 +36,7 @@ export function CharactersDetailsPage() {
   }, [id]);
 
   return (
-    <>
+    <Container>
       <Row>
         <Col>
           <span className={characterStyles.characterName + " " + styles.text}>
@@ -58,6 +58,6 @@ export function CharactersDetailsPage() {
       {character?.data[0].description && (
         <BlocksRenderer content={character?.data[0].description} />
       )}
-    </>
+    </Container>
   );
 }

@@ -65,6 +65,7 @@ export function Layout() {
               >
                 <Navbar.Brand>
                   <FontAwesomeIcon
+                    title="Contact"
                     icon={faFeather}
                     color={"#9a8d3b"}
                     style={{ width: "50px" }}
@@ -146,6 +147,23 @@ export function Layout() {
           </Navbar>
         </Row>
         <Outlet />
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          bottom: "0",
+          width: "100%",
+          padding: "0 10px",
+          textAlign: "center",
+        }}
+      >
+        <span className={styles.text}>
+          <Link to={routes.imprint}>Imprint</Link> |{" "}
+          <Link to={routes.contact}>Contact</Link> |{" "}
+          <Link to={routes.privacy}>Privacy</Link> |{" "}
+          <Link to={routes.license}>Licenses</Link> | Content and Images © 2025
+          Lena Tauchner
+        </span>
       </div>
     </div>
   );

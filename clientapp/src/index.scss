@@ -1,3 +1,5 @@
+@import "bootstrap/scss/functions";
+
 @font-face {
   font-family: "Cormorant Garamond";
   src: url("../fonts/CormorantGaramond-Regular.woff2");
@@ -176,6 +178,11 @@
 $font-family-base: "Cormorant Infant", serif;
 $headings-font-family: "Cormorant Garamond", serif;
 $font-size-base: 1.5rem;
+$body-bg: #131016;
+$body-color: #9a8d3b;
+$link-color: #9a8d3b;
+$primary: #9a8d3b;
+$input-border-color: #9a8d3b;
 
 :root {
   --swiper-theme-color: #9a8d3b !important;
