@@ -25,16 +25,21 @@ blockquote {
 }
 
 .mainContainer {
+  @media screen and (max-width: 768px) {
+    height: 100vh;
+    width: 100vw;
+    padding: 10px 10px 120px 10px;
+
+    & nav {
+      padding: 0 12px;
+    }
+  }
   @media screen and (min-width: 768px) {
     height: calc(100vh - 90px);
     width: calc(100vw - 90px);
     border-radius: 40px;
+    padding: 45px;
   }
-  @media screen and (max-width: 768px) {
-    height: 100vh;
-    width: 100vw;
-  }
-  padding: 45px;
   background-color: #131016;
   background-image: url("/background.jpg");
   background-size: cover;

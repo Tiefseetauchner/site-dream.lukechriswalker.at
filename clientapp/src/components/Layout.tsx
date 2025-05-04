@@ -85,16 +85,8 @@ export function Layout() {
                 className="gap-3 d-none d-lg-flex"
                 style={{ position: "absolute", left: "90px" }}
               >
-                <Nav.Item>
-                  <Link to={routes.home} className="text-decoration-none">
-                    <span className={styles.text}>Home</span>
-                  </Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Link to={routes.books} className="text-decoration-none">
-                    <span className={styles.text}>Books</span>
-                  </Link>
-                </Nav.Item>
+                <NavLink to={routes.home}>Home</NavLink>
+                <NavLink to={routes.books}>Books</NavLink>
               </Nav>
               <h1
                 className={`${styles.title} position-absolute start-50 translate-middle-x`}
@@ -105,16 +97,8 @@ export function Layout() {
                 className="gap-3 d-none d-lg-flex"
                 style={{ position: "absolute", right: "90px" }}
               >
-                <Nav.Item>
-                  <Link to={routes.characters} className="text-decoration-none">
-                    <span className={styles.text}>Characters</span>
-                  </Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Link to={routes.mainAuthor} className="text-decoration-none">
-                    <span className={styles.text}>Author</span>
-                  </Link>
-                </Nav.Item>
+                <NavLink to={routes.characters}>Characters</NavLink>
+                <NavLink to={routes.mainAuthor}>Author</NavLink>
               </Nav>
             </div>
             <Navbar.Collapse
@@ -122,26 +106,10 @@ export function Layout() {
               style={{ paddingTop: "50px" }}
             >
               <Nav className="d-lg-none">
-                <Nav.Item>
-                  <Link to={routes.home} className="text-decoration-none">
-                    <span className={styles.text}>Home</span>
-                  </Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Link to={routes.books} className="text-decoration-none">
-                    <span className={styles.text}>Books</span>
-                  </Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Link to={routes.characters} className="text-decoration-none">
-                    <span className={styles.text}>Characters</span>
-                  </Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Link to={routes.mainAuthor} className="text-decoration-none">
-                    <span className={styles.text}>Author</span>
-                  </Link>
-                </Nav.Item>
+                <NavLink to={routes.home}>Home</NavLink>
+                <NavLink to={routes.books}>Books</NavLink>
+                <NavLink to={routes.characters}>Characters</NavLink>
+                <NavLink to={routes.mainAuthor}>Author</NavLink>
               </Nav>
             </Navbar.Collapse>
           </Navbar>
@@ -155,6 +123,8 @@ export function Layout() {
           width: "100%",
           padding: "0 10px",
           textAlign: "center",
+          backgroundColor: "#000",
+          zIndex: "1000",
         }}
       >
         <span className={styles.text}>
@@ -166,5 +136,19 @@ export function Layout() {
         </span>
       </div>
     </div>
+  );
+}
+
+interface NavLinkProps extends React.PropsWithChildren {
+  to: string;
+}
+
+function NavLink({ to, children }: NavLinkProps) {
+  return (
+    <Nav.Item>
+      <Link to={to} className="text-decoration-none">
+        <span className={styles.text}>{children}</span>
+      </Link>
+    </Nav.Item>
   );
 }
