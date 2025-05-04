@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { Utils, UID } from "@strapi/types";
-import type { Schema } from "@strapi/strapi";
+import type { Utils, UID, Schema } from "@strapi/strapi";
 
 export type ID = `${number}` | number;
 export type BooleanValue =
