@@ -3,7 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import { usePageTitle } from "../../PageTitleContext";
 import { useEffect, useState } from "react";
 import { CollectionTypeResponse } from "../../../../types/types";
-import { client } from "../../../strapiClient";
+import { client, resolveMedia } from "../../../strapiClient";
 import { Link, useParams } from "react-router-dom";
 import { routes } from "../../../utils/routes";
 import styles from "../../Shared.module.scss";
@@ -49,7 +49,7 @@ export function AuthorPage() {
             <img
               className="img-fluid"
               style={{ borderRadius: "15px" }}
-              src={author?.data[0].profile_picture?.url}
+              src={resolveMedia(author?.data[0].profile_picture?.url)}
               alt={author?.data[0].profile_picture?.alternativeText}
             />
             <p>

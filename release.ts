@@ -45,6 +45,7 @@ function main() {
     console.log(`🔨 Building release for ${ENVIRONMENT}...`);
 
     runCommand("bun run build");
+    runCommand("bun run prerender");
 
     cleanReleaseDir();
 

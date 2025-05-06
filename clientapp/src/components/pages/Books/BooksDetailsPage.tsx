@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { client } from "../../../strapiClient";
+import { client, resolveMedia } from "../../../strapiClient";
 import { CollectionTypeResponse } from "../../../../types/types";
 import { usePageTitle } from "../../PageTitleContext";
 import { Col, Container, Row } from "react-bootstrap";
@@ -26,7 +26,7 @@ export function BooksDetailsPage() {
               $eq: id,
             },
           },
-          populate: ["cover_image", "authors"],
+          populate: ["cover_image", "authors", "links"],
         })) as unknown as CollectionTypeResponse<"api::book.book">;
 
         setBooks(data);
@@ -43,7 +43,7 @@ export function BooksDetailsPage() {
         <Col md={4}>
           <img
             className={bookStyles.coverImage}
-            src={books?.data[0].cover_image.url}
+            src={resolveMedia(books?.data[0].cover_image.url)}
             alt={books?.data[0].cover_image.alternativeText}
           />
         </Col>
@@ -62,6 +62,17 @@ export function BooksDetailsPage() {
           <p style={{ whiteSpace: "preserve-breaks" }}>
             {books?.data[0].content_warnings}
           </p>
+          <h2 className={bookStyles.infoTitle}>Links</h2>
+          {books?.data[0].links.map(
+            (link: { link: string; display_name: string }) => (
+              <>
+                <a href={link.link} target="_blank" rel="noreferrer">
+                  {link.display_name}
+                </a>
+                <br />
+              </>
+            )
+          )}
         </Col>
       </Row>
       <Row>

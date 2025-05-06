@@ -8,6 +8,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "generate-api": "cd backend/ && strapi ts:generate-types",
+    "prerender": "cd clientapp/ && bun ./prerender",
     "copy-types": "bun generate-api && bun copyTypes.ts"
   },
   "packageManager": "bun@1.2.10",

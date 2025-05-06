@@ -52,5 +52,10 @@
       "target": "api::character.character",
       "inversedBy": "books"
     }
+  },
+  "pluginOptions": {
+    "webtools": {
+      "enabled": true
+    }
   }
 }

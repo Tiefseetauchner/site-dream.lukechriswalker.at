@@ -31,7 +31,7 @@ export function ContactPage() {
     const formData = new FormData(form);
     const formJson = Object.fromEntries(formData.entries());
 
-    await fetch("/api/ezforms/submit", {
+    await fetch("/admin/api/ezforms/submit", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

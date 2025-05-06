@@ -43,5 +43,10 @@
     "blurb": {
       "type": "string"
     }
+  },
+  "pluginOptions": {
+    "webtools": {
+      "enabled": true
+    }
   }
 }

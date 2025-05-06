@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { CollectionTypeResponse } from "../../../../types/types";
 import { Col, Container, Row } from "react-bootstrap";
-import { client } from "../../../strapiClient";
+import { client, resolveMedia } from "../../../strapiClient";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { usePageTitle } from "../../PageTitleContext";
@@ -74,7 +74,7 @@ export function BooksOverviewPage() {
                     maxWidth: "100%",
                     maxHeight: "60vh",
                   }}
-                  src={book.cover_image.url}
+                  src={resolveMedia(book.cover_image.url)}
                   alt={book.cover_image.alternativeText}
                 />
               </div>

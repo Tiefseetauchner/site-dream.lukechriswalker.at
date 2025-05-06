@@ -115,8 +115,25 @@ export function Layout() {
           </Navbar>
         </Row>
         <Outlet />
+        <div
+          className={"d-block d-md-none"}
+          style={{
+            width: "100%",
+            padding: "0 10px",
+            textAlign: "center",
+          }}
+        >
+          <span className={styles.text}>
+            <Link to={routes.imprint}>Imprint</Link> |{" "}
+            <Link to={routes.contact}>Contact</Link> |{" "}
+            <Link to={routes.privacy}>Privacy</Link> |{" "}
+            <Link to={routes.license}>Licenses</Link> | Content and Images ©
+            2025 Lena Tauchner
+          </span>
+        </div>
       </div>
       <div
+        className={"d-none d-md-block"}
         style={{
           position: "absolute",
           bottom: "0",
