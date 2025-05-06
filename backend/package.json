@@ -15,9 +15,9 @@
     "upgrade:dry": "bun x @strapi/upgrade latest --dry"
   },
   "dependencies": {
-    "@strapi/plugin-users-permissions": "5.12.7",
+    "@strapi/plugin-users-permissions": "^5.12.7",
     "@strapi/provider-email-nodemailer": "^5.12.7",
-    "@strapi/strapi": "5.12.7",
+    "@strapi/strapi": "^5.12.7",
     "ajv": "^8.17.1",
     "better-sqlite3": "^11.9.1",
     "pg": "8.8.0",
@@ -25,7 +25,14 @@
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
     "strapi-plugin-ezforms": "^0.1.7",
-    "styled-components": "^6.0.0"
+    "strapi-plugin-webtools": "^1.4.1",
+    "styled-components": "^6.0.0",
+    "webtools-addon-sitemap": "^1.2.1"
+  },
+  "overrides": {
+    "strapi-plugin-ezforms": {
+      "@strapi/strapi": "^5.12.7"
+    }
   },
   "devDependencies": {
     "@types/node": "^20",
