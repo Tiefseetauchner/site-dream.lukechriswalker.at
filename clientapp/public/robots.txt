@@ -1,7 +1,7 @@
 User-agent: *
-/contact
-/imprint
-/license
-/privacy
+Disallow: /contact
+Disallow: /imprint
+Disallow: /license
+Disallow: /privacy
 
 Sitemap: https://www.lukechriswalker.at/sitemap.xml
