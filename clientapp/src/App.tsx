@@ -1,13 +1,13 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "./utils/routes";
-import { PageTitleProvider } from "./components/PageTitleProvider";
+import { PageMetaProvider } from "./components/PageMetaProvider";
 
 function App() {
   return (
     <>
-      <PageTitleProvider>
+      <PageMetaProvider>
         <RouterProvider router={router}></RouterProvider>
-      </PageTitleProvider>
+      </PageMetaProvider>
     </>
   );
 }

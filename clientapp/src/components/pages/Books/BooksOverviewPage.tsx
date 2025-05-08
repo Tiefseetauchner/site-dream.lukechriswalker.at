@@ -4,15 +4,14 @@ import { Col, Container, Row } from "react-bootstrap";
 import { client, resolveMedia } from "../../../strapiClient";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
-import { usePageTitle } from "../../PageTitleContext";
+import { usePageMeta } from "../../PageMetaContext";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Link } from "react-router-dom";
 
 export function BooksOverviewPage() {
-  const { setPageTitle } = usePageTitle();
-  setPageTitle("Books");
+  const { setPageMeta } = usePageMeta();
 
   const [books, setBooks] =
     useState<CollectionTypeResponse<"api::book.book">>();
@@ -27,6 +26,12 @@ export function BooksOverviewPage() {
 
       setBooks(data);
     }
+
+    setPageMeta({
+      title: "Books",
+      description:
+        "Discover the Dreams book series - emotionally charged fiction exploring power exchange, healing, kink, and complex relationships.",
+    });
 
     getBooks();
   }, []);

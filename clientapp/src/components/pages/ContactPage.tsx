@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import { usePageTitle } from "../PageTitleContext";
+import { usePageMeta } from "../PageMetaContext";
 import { client } from "../../strapiClient";
 import { SingleTypeResponse } from "../../../types/types";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 
 export function ContactPage() {
-  const { setPageTitle } = usePageTitle();
-  setPageTitle("Contact");
+  const { setPageMeta } = usePageMeta();
 
   const [contact, setContact] =
     useState<SingleTypeResponse<"api::contact.contact">>();
@@ -20,6 +19,8 @@ export function ContactPage() {
 
       setContact(data);
     }
+
+    setPageMeta({ title: "Contact", description: "Contact us." });
 
     getContact();
   }, []);

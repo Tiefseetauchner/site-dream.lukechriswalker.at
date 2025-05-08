@@ -4,10 +4,10 @@ import { Row, Navbar, Nav } from "react-bootstrap";
 import { Link, Outlet } from "react-router-dom";
 import { routes } from "../utils/routes";
 import styles from "./Shared.module.scss";
-import { usePageTitle } from "./PageTitleContext";
+import { usePageMeta } from "./PageMetaContext";
 
 export function Layout() {
-  const { pageTitle } = usePageTitle();
+  const { pageTitle } = usePageMeta();
 
   return (
     <div

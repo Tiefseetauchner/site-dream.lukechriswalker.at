@@ -1,6 +1,6 @@
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { Col, Container, Row } from "react-bootstrap";
-import { usePageTitle } from "../../PageTitleContext";
+import { usePageMeta } from "../../PageMetaContext";
 import { useEffect, useState } from "react";
 import { CollectionTypeResponse } from "../../../../types/types";
 import { client, resolveMedia } from "../../../strapiClient";
@@ -11,8 +11,7 @@ import styles from "../../Shared.module.scss";
 export function AuthorPage() {
   const { id } = useParams();
 
-  const { setPageTitle } = usePageTitle();
-  setPageTitle("Author");
+  const { setPageMeta } = usePageMeta();
 
   const [author, setAuthor] =
     useState<CollectionTypeResponse<"api::author.author">>();
@@ -29,7 +28,14 @@ export function AuthorPage() {
       })) as unknown as CollectionTypeResponse<"api::author.author">;
 
       setAuthor(data);
+
+      setPageMeta({
+        title: "Author",
+        description: `${data.data[0].name} - author of the Dreams series, with ${data.data[0].books.length} published book${data.data[0].books.length === 1 ? "" : "s"}.`,
+      });
     }
+
+    setPageMeta({ title: "Author", description: "" });
 
     getAuthor();
   }, [id]);

@@ -1,11 +1,19 @@
 import { Container } from "react-bootstrap";
-import { usePageTitle } from "../PageTitleContext";
+import { usePageMeta } from "../PageMetaContext";
 import { routes } from "../../utils/routes";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 export function LicensePage() {
-  const { setPageTitle } = usePageTitle();
-  setPageTitle("Licenses");
+  const { setPageMeta } = usePageMeta();
+
+  useEffect(() => {
+    setPageMeta({
+      title: "Licenses",
+      description:
+        "This page contains the licenses for the various components used on this website.",
+    });
+  });
 
   return (
     <Container>

@@ -1,13 +1,12 @@
 import { Container, Row, Col } from "react-bootstrap";
-import { usePageTitle } from "../PageTitleContext";
+import { usePageMeta } from "../PageMetaContext";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { useEffect, useState } from "react";
 import { SingleTypeResponse } from "../../../types/types";
 import { client } from "../../strapiClient";
 
 export function HomePage() {
-  const { setPageTitle } = usePageTitle();
-  setPageTitle("Dreams");
+  const { setPageMeta } = usePageMeta();
 
   const [homePageTexts, setHomePageTexts] =
     useState<SingleTypeResponse<"api::home-page.home-page">>();
@@ -20,6 +19,12 @@ export function HomePage() {
 
       setHomePageTexts(data);
     }
+
+    setPageMeta({
+      title: "Dreams",
+      description:
+        "Not all dreams are gentle. Some cut deep. Some teach you who you are... Welcome to the official website of the Dreams series!",
+    });
 
     getHomePageTexts();
   }, []);

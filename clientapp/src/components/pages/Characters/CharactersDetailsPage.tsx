@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { CollectionTypeResponse } from "../../../../types/types";
-import { usePageTitle } from "../../PageTitleContext";
+import { usePageMeta } from "../../PageMetaContext";
 import { client } from "../../../strapiClient";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { useParams } from "react-router-dom";
@@ -12,8 +12,7 @@ import styles from "../../Shared.module.scss";
 export function CharactersDetailsPage() {
   const { id } = useParams();
 
-  const { setPageTitle } = usePageTitle();
-  setPageTitle("Profile");
+  const { setPageMeta } = usePageMeta();
 
   const [character, setCharacter] =
     useState<CollectionTypeResponse<"api::character.character">>();
@@ -30,7 +29,15 @@ export function CharactersDetailsPage() {
       })) as unknown as CollectionTypeResponse<"api::character.character">;
 
       setCharacter(data);
+
+      const name = data?.data[0].name;
+      const blurb = data?.data[0].blurb?.slice(0, 140);
+      const characterMetaDescription = `${name} - Dreams series character overview. ${blurb}`;
+
+      setPageMeta({ title: "Profile", description: characterMetaDescription });
     }
+
+    setPageMeta({ title: "Profile", description: "Character Profile" });
 
     getCharacters();
   }, [id]);

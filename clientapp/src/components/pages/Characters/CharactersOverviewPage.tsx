@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { CollectionTypeResponse } from "../../../../types/types";
 import { client } from "../../../strapiClient";
-import { usePageTitle } from "../../PageTitleContext";
+import { usePageMeta } from "../../PageMetaContext";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { routes } from "../../../utils/routes";
 
 export function CharactersOverviewPage() {
-  const { setPageTitle } = usePageTitle();
-  setPageTitle("Characters");
+  const { setPageMeta } = usePageMeta();
 
   const [characters, setCharacters] =
     useState<CollectionTypeResponse<"api::character.character">>();
@@ -21,6 +20,12 @@ export function CharactersOverviewPage() {
 
       setCharacters(data);
     }
+
+    setPageMeta({
+      title: "Characters",
+      description:
+        "Get to know the main characters from the Dreams series with short spotlights on their roles, dynamics, and emotional themes.",
+    });
 
     getCharacters();
   }, []);

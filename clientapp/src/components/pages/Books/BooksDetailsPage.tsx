@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { client, resolveMedia } from "../../../strapiClient";
 import { CollectionTypeResponse } from "../../../../types/types";
-import { usePageTitle } from "../../PageTitleContext";
+import { usePageMeta } from "../../PageMetaContext";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../Shared.module.scss";
 import bookStyles from "./BooksDetailsPage.module.scss";
@@ -12,7 +12,7 @@ import { routes } from "../../../utils/routes";
 export function BooksDetailsPage() {
   const { id } = useParams();
 
-  const { setPageTitle } = usePageTitle();
+  const { setPageMeta } = usePageMeta();
 
   const [books, setBooks] =
     useState<CollectionTypeResponse<"api::book.book">>();
@@ -30,12 +30,20 @@ export function BooksDetailsPage() {
         })) as unknown as CollectionTypeResponse<"api::book.book">;
 
         setBooks(data);
-        setPageTitle(data.data[0].title ?? "");
+
+        const title = data?.data[0].title;
+        const blurb = data?.data[0].description?.slice(0, 140);
+        const bookMetaDescription = `${title} - a novel in the Dreams series. ${blurb}`;
+
+        setPageMeta({
+          title: title ?? "*-* Story *-*",
+          description: bookMetaDescription,
+        });
       }
     }
 
     getBooks();
-  }, [id, setPageTitle]);
+  }, [id]);
 
   return (
     <Container>

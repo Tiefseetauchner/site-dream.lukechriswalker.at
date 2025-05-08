@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import { usePageTitle } from "../PageTitleContext";
+import { usePageMeta as usePageMeta } from "../PageMetaContext";
 import { useEffect, useState } from "react";
 import { SingleTypeResponse } from "../../../types/types";
 import { client } from "../../strapiClient";
@@ -7,8 +7,7 @@ import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import moment from "moment";
 
 export function PrivacyPage() {
-  const { setPageTitle } = usePageTitle();
-  setPageTitle("Privacy Policy");
+  const { setPageMeta } = usePageMeta();
 
   const [privacy, setPrivacy] =
     useState<SingleTypeResponse<"api::privacy.privacy">>();
@@ -21,6 +20,11 @@ export function PrivacyPage() {
 
       setPrivacy(data);
     }
+
+    setPageMeta({
+      title: "Privacy Policy",
+      description: "Privacy Policy of the website.",
+    });
 
     getPrivacy();
   }, []);
