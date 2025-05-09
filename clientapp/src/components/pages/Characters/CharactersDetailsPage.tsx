@@ -25,7 +25,7 @@ export function CharactersDetailsPage() {
             $eq: id,
           },
         },
-        populate: ["profile_picture"],
+        populate: ["profile_picture", "books"],
       })) as unknown as CollectionTypeResponse<"api::character.character">;
 
       setCharacter(data);
@@ -46,9 +46,9 @@ export function CharactersDetailsPage() {
     <Container>
       <Row>
         <Col>
-          <span className={characterStyles.characterName + " " + styles.text}>
+          <h2 className={characterStyles.characterName + " " + styles.text}>
             {character?.data[0].name}
-          </span>
+          </h2>
           {character?.data[0].birthday && (
             <span
               className={characterStyles.characterBirthday + " " + styles.text}
@@ -57,14 +57,26 @@ export function CharactersDetailsPage() {
               {moment(character.data[0].birthday).format("MMMM Do, YYYY")}
             </span>
           )}
+          <p className={characterStyles.characterBlurb + " " + styles.text}>
+            {character?.data[0].blurb}
+          </p>
+          {character?.data[0].description && (
+            <BlocksRenderer content={character?.data[0].description} />
+          )}
         </Col>
       </Row>
-      <p className={characterStyles.characterBlurb + " " + styles.text}>
-        {character?.data[0].blurb}
-      </p>
-      {character?.data[0].description && (
-        <BlocksRenderer content={character?.data[0].description} />
-      )}
+      <Row>
+        <Col>
+          <h3>Appears on:</h3>
+          <ul>
+            {character?.data[0].books?.map((book) => (
+              <li key={book.id}>
+                <a href={`/books/${book.slug}`}>{book.title}</a>
+              </li>
+            ))}
+          </ul>
+        </Col>
+      </Row>
     </Container>
   );
 }
