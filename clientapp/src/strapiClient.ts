@@ -33,7 +33,7 @@ interface ICollectionTypeManager {
   delete(documentID: string, queryParams?: API.BaseQueryParams): Promise<void>;
 }
 
-class RetryingCollectionTypeManagerDecorator implements ICollectionTypeManager {
+class RetryingCollectionTypeManagerAdapter implements ICollectionTypeManager {
   private manager: CollectionTypeManager;
   private retries: number;
   private maxRetries: number;
@@ -95,7 +95,7 @@ interface ISingleTypeManager {
   delete(queryParams?: API.BaseQueryParams): Promise<void>;
 }
 
-class RetryingSingleTypeManagerDecorator implements ISingleTypeManager {
+class RetryingSingleTypeManagerAdapter implements ISingleTypeManager {
   private manager: SingleTypeManager;
   private retries: number;
   private maxRetries: number;
@@ -162,7 +162,7 @@ class RetryingStrapiClientAdapter {
   }
 
   collection(resource: string): ICollectionTypeManager {
-    return new RetryingCollectionTypeManagerDecorator(
+    return new RetryingCollectionTypeManagerAdapter(
       this.client.collection(resource),
       this.retries,
       this.maxRetries
@@ -170,7 +170,7 @@ class RetryingStrapiClientAdapter {
   }
 
   single(resource: string): ISingleTypeManager {
-    return new RetryingSingleTypeManagerDecorator(
+    return new RetryingSingleTypeManagerAdapter(
       this.client.single(resource),
       this.retries,
       this.maxRetries
