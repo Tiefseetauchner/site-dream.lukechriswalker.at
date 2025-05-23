@@ -15,6 +15,7 @@ export function CharactersOverviewPage() {
   useEffect(() => {
     async function getCharacters() {
       const data = (await client.collection("characters").find({
+        sort: "createdAt",
         populate: ["profile_picture"],
       })) as unknown as CollectionTypeResponse<"api::character.character">;
 

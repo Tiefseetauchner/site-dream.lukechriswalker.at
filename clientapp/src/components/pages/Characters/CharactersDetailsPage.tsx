@@ -57,9 +57,11 @@ export function CharactersDetailsPage() {
               {moment(character.data[0].birthday).format("MMMM Do, YYYY")}
             </span>
           )}
-          <p className={characterStyles.characterBlurb + " " + styles.text}>
-            {character?.data[0].blurb}
-          </p>
+          {character?.data[0].blurb && (
+            <p className={characterStyles.characterBlurb + " " + styles.text}>
+              {character?.data[0].blurb}
+            </p>
+          )}
           {character?.data[0].description && (
             <BlocksRenderer content={character?.data[0].description} />
           )}
@@ -67,14 +69,20 @@ export function CharactersDetailsPage() {
       </Row>
       <Row>
         <Col>
-          <h3>Appears on:</h3>
-          <ul>
-            {character?.data[0].books?.map((book) => (
-              <li key={book.id}>
-                <a href={`/books/${book.slug}`}>{book.title}</a>
-              </li>
-            ))}
-          </ul>
+          {character?.data[0].books?.length > 0 && (
+            <>
+              <h3>Appears on:</h3>
+              <ul>
+                {character?.data[0].books?.map(
+                  (book: { id: number; title: string; slug: string }) => (
+                    <li key={book.id}>
+                      <a href={`/books/${book.slug}`}>{book.title}</a>
+                    </li>
+                  )
+                )}
+              </ul>
+            </>
+          )}
         </Col>
       </Row>
     </Container>
