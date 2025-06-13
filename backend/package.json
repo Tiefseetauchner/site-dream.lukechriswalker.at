@@ -15,9 +15,9 @@
     "upgrade:dry": "bun x @strapi/upgrade latest --dry"
   },
   "dependencies": {
-    "@strapi/plugin-users-permissions": "^5.12.7",
-    "@strapi/provider-email-nodemailer": "^5.12.7",
-    "@strapi/strapi": "^5.12.7",
+    "@strapi/plugin-users-permissions": "5.15.1",
+    "@strapi/provider-email-nodemailer": "5.15.1",
+    "@strapi/strapi": "5.15.1",
     "ajv": "^8.17.1",
     "better-sqlite3": "^11.9.1",
     "pg": "8.8.0",
