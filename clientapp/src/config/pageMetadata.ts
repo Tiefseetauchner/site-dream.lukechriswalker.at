@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { routes } from "@/utils/routes";
 
-type PageMetadataId =
+export type PageMetadataId =
   | "home"
   | "books"
   | "bookDetail"
@@ -13,7 +13,7 @@ type PageMetadataId =
   | "imprint"
   | "privacy";
 
-type PageMetadataEntry = {
+export type PageMetadataEntry = {
   id: PageMetadataId;
   path: string;
   title: string;
@@ -22,13 +22,15 @@ type PageMetadataEntry = {
   dynamic?: boolean;
 };
 
-type FallbackMetadataEntry = {
+export type FallbackMetadataEntry = {
   id: "fallback";
   path: string;
   title: string;
   subtitle: string;
   description?: string;
 };
+
+export type PageMetadata = PageMetadataEntry | FallbackMetadataEntry;
 
 const SITE_TITLE = "Dreams";
 

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
+import { PageMetadata } from "@/components/PageMetadata";
 import { Panel } from "@/components/Panel";
 import { getPageMetadataById, toNextMetadata } from "@/config/pageMetadata";
 import { routes } from "@/utils/routes";
@@ -83,66 +84,69 @@ export default async function AuthorDetailPage({ params }: AuthorPageProps) {
     : null;
 
   return (
-    <div className="space-y-8">
-      {author.blurb && (
-        <Panel>
-          <p className="text-center text-lg italic text-slate-200">
-            &ldquo;{author.blurb}&rdquo;
-          </p>
-        </Panel>
-      )}
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,260px)_1fr]">
-        <Panel>
-          <div className="space-y-6">
-            {profileImage ? (
-              <Image
-                src={profileImage.url}
-                alt={profileImage.alternativeText}
-                width={profileImage.width}
-                height={profileImage.height}
-                className="mx-auto w-full max-w-xs rounded-xl shadow-2xl"
-              />
-            ) : (
-              <p className="text-sm italic text-slate-200">
-                Portrait coming soon.
-              </p>
+    <>
+      <PageMetadata subtitle={author.name ?? undefined} />
+      <div className="space-y-8">
+        {author.blurb && (
+          <Panel>
+            <p className="text-center text-lg italic text-slate-200">
+              &ldquo;{author.blurb}&rdquo;
+            </p>
+          </Panel>
+        )}
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,260px)_1fr]">
+          <Panel>
+            <div className="space-y-6">
+              {profileImage ? (
+                <Image
+                  src={profileImage.url}
+                  alt={profileImage.alternativeText}
+                  width={profileImage.width}
+                  height={profileImage.height}
+                  className="mx-auto w-full max-w-xs rounded-xl shadow-2xl"
+                />
+              ) : (
+                <p className="text-sm italic text-slate-200">
+                  Portrait coming soon.
+                </p>
+              )}
+              {books.length > 0 && (
+                <div className="space-y-2">
+                  <h3 className="text-lg font-semibold uppercase tracking-widest text-slate-200">
+                    Stories
+                  </h3>
+                  <ul className="space-y-1 text-sm text-slate-100">
+                    {books.map((book) => (
+                      <li key={book.id ?? book.slug ?? book.title}>
+                        {book.slug ? (
+                          <Link
+                            href={routes.book(book.slug)}
+                            className="underline underline-offset-4 hover:text-slate-50"
+                          >
+                            {book.title}
+                          </Link>
+                        ) : (
+                          <span>{book.title}</span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </Panel>
+          <Panel>
+            {author.name && (
+              <h2 className="text-3xl font-semibold tracking-wide text-white">
+                {author.name}
+              </h2>
             )}
-            {books.length > 0 && (
-              <div className="space-y-2">
-                <h3 className="text-lg font-semibold uppercase tracking-widest text-slate-200">
-                  Stories
-                </h3>
-                <ul className="space-y-1 text-sm text-slate-100">
-                  {books.map((book) => (
-                    <li key={book.id ?? book.slug ?? book.title}>
-                      {book.slug ? (
-                        <Link
-                          href={routes.book(book.slug)}
-                          className="underline underline-offset-4 hover:text-slate-50"
-                        >
-                          {book.title}
-                        </Link>
-                      ) : (
-                        <span>{book.title}</span>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            {author.description && (
+              <BlocksRenderer content={author.description as BlocksContent} />
             )}
-          </div>
-        </Panel>
-        <Panel>
-          {author.name && (
-            <h2 className="text-3xl font-semibold tracking-wide text-white">
-              {author.name}
-            </h2>
-          )}
-          {author.description && (
-            <BlocksRenderer content={author.description as BlocksContent} />
-          )}
-        </Panel>
+          </Panel>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

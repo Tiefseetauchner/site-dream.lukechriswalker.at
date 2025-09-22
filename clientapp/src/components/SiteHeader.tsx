@@ -1,18 +1,13 @@
 "use client";
 
 import NavMenu from "@/components/NavMenu";
-import { resolvePageMetadata } from "@/config/pageMetadata";
+import { usePageMetadata } from "@/components/PageMetadataProvider";
 import { cormorantSC } from "@/fonts/fonts";
 import styles from "@/styles/retro.module.css";
-import { usePathname } from "next/navigation";
-import { useMemo } from "react";
 
 export function SiteHeader() {
-  const pathname = usePathname() ?? "/";
-  const { title, subtitle } = useMemo(
-    () => resolvePageMetadata(pathname),
-    [pathname],
-  );
+  const { metadata } = usePageMetadata();
+  const { title, subtitle } = metadata;
 
   return (
     <header className={`${styles.header} rounded-t-lg px-8 pb-6 pt-9`}>
