@@ -31,7 +31,7 @@ class RetryingCollectionTypeManagerAdapter implements ICollectionTypeManager {
   private retries: number | undefined;
   private maxRetries: number;
 
-  constructor(manager: CollectionTypeManager, retries = undefined, maxRetries = 5) {
+  constructor(manager: CollectionTypeManager, retries: number | undefined, maxRetries = 5) {
     this.manager = manager;
     this.retries = retries;
     this.maxRetries = maxRetries;
@@ -66,10 +66,10 @@ interface ISingleTypeManager {
 
 class RetryingSingleTypeManagerAdapter implements ISingleTypeManager {
   private manager: SingleTypeManager;
-  private retries: number;
+  private retries: number | undefined;
   private maxRetries: number;
 
-  constructor(manager: SingleTypeManager, retries = 3, maxRetries = 5) {
+  constructor(manager: SingleTypeManager, retries: number | undefined, maxRetries = 5) {
     this.manager = manager;
     this.retries = retries;
     this.maxRetries = maxRetries;
@@ -90,11 +90,11 @@ class RetryingSingleTypeManagerAdapter implements ISingleTypeManager {
 
 class RetryingStrapiClientAdapter {
   private client: StrapiClient;
-  private retries: number;
+  private retries: number | undefined;
   private maxRetries: number;
   files: FilesManager;
 
-  constructor(client: StrapiClient, retries = 3, maxRetries = 5) {
+  constructor(client: StrapiClient, retries: number | undefined, maxRetries = 5) {
     this.client = client;
     this.retries = retries;
     this.maxRetries = maxRetries;
@@ -128,7 +128,7 @@ export const client = (apiUrl?: string, apiToken?: string) => {
     auth: API_TOKEN,
   });
 
-  return new RetryingStrapiClientAdapter(strapiClient);
+  return new RetryingStrapiClientAdapter(strapiClient, undefined, 10);
 };
 
 export function resolveMedia(url: string): string {

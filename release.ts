@@ -15,7 +15,7 @@ dotenv.config({
   path: path.resolve(process.cwd(), `.env${ENVIRONMENT ? `.${ENVIRONMENT}` : ""}`),
 });
 
-const VITE_BUILD_DIR = getArg("vite", "clientapp/dist")!;
+const NEXT_BUILD_DIR = getArg("next", "clientapp/")!;
 const BACKEND_DIR = getArg("backend", "backend/")!;
 const RELEASE_DIR = getArg("release", "build")!;
 
@@ -44,7 +44,7 @@ function main() {
     runCommand("bun run build");
     cleanReleaseDir();
 
-    copyBuildOutput(VITE_BUILD_DIR, path.join(RELEASE_DIR, "clientapp"));
+    copyBuildOutput(NEXT_BUILD_DIR, path.join(RELEASE_DIR, "clientapp"));
     copyBuildOutput(`${BACKEND_DIR}/config`, path.join(RELEASE_DIR, "backend/config"));
     copyBuildOutput(`${BACKEND_DIR}/src`, path.join(RELEASE_DIR, "backend/src"));
     copyBuildOutput(`${BACKEND_DIR}/package.json`, path.join(RELEASE_DIR, "backend/package.json"));
