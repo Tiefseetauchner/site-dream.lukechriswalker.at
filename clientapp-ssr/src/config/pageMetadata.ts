@@ -1,7 +1,17 @@
 import type { Metadata } from "next";
 import { routes } from "@/utils/routes";
 
-type PageMetadataId = "home" | "books" | "bookDetail" | "license";
+type PageMetadataId =
+  | "home"
+  | "books"
+  | "bookDetail"
+  | "license"
+  | "characters"
+  | "characterDetail"
+  | "authorDetail"
+  | "contact"
+  | "imprint"
+  | "privacy";
 
 type PageMetadataEntry = {
   id: PageMetadataId;
@@ -56,6 +66,56 @@ const pageMetadataEntries: PageMetadataEntry[] = [
     subtitle: "Understand how the Dream universe content is licensed.",
     description:
       "Rights, licensing, and attribution guidance for material across the Dream universe.",
+  },
+  {
+    id: "characters",
+    path: routes.characters,
+    title: "Characters",
+    subtitle: "Meet the people who bring the Dream universe to life.",
+    description:
+      "Explore the key figures from the Dreams series and discover their relationships and arcs.",
+  },
+  {
+    id: "characterDetail",
+    path: "/characters",
+    title: "Character Profile",
+    subtitle: "Dive into the history and relationships of this Dream character.",
+    description:
+      "Biographical notes, appearances, and background for an individual Dreams character.",
+    dynamic: true,
+  },
+  {
+    id: "authorDetail",
+    path: "/authors",
+    title: "Author",
+    subtitle: "Learn more about the minds behind the Dream universe.",
+    description:
+      "Author biographies, featured works, and insights from the Dream universe.",
+    dynamic: true,
+  },
+  {
+    id: "contact",
+    path: routes.contact,
+    title: "Contact",
+    subtitle: "Get in touch with the Dream universe team.",
+    description:
+      "Reach out for rights inquiries, questions, or collaboration opportunities.",
+  },
+  {
+    id: "imprint",
+    path: routes.imprint,
+    title: "Imprint",
+    subtitle: "Legal details for the Dream universe website.",
+    description:
+      "Publisher contact information and statutory disclosures for Dream universe.",
+  },
+  {
+    id: "privacy",
+    path: routes.privacy,
+    title: "Privacy Policy",
+    subtitle: "How we handle data on the Dream universe website.",
+    description:
+      "Understand how personal data is collected, processed, and protected when you browse Dreams.",
   },
 ];
 
