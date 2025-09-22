@@ -1,0 +1,101 @@
+﻿.body {
+  margin: 0;
+  min-height: 100vh;
+  background: url("/background.jpg") center/cover no-repeat fixed;
+  color: white
+}
+
+.wrapper {
+  position: relative;
+  isolation: isolate;
+}
+
+.wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, color-mix(in lab, var(--color-retro-800) 30%, black) 0%, black 70%);
+  pointer-events: none;
+  z-index: -1;
+  border-radius: inherit;
+}
+
+.header {
+  position: relative;
+  overflow: visible;
+  z-index: 10;
+  background: linear-gradient(180deg, color-mix(in lab, var(--color-retro-200) 40%, black) 0%, color-mix(in lab, var(--color-retro-800) 20%, black) 100%);
+  border-bottom: 5px solid var(--color-retro-contrast);
+}
+
+.header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, color-mix(in lab, white 60%, transparent) 0%, transparent 55%);
+  opacity: 0.6;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.title {
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.45);
+  letter-spacing: 0.08em;
+}
+
+.tagline {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.navToggle {
+  background: linear-gradient(180deg, var(--color-retro-800), var(--color-retro-200));
+  border-left: 1px solid color-mix(in lab, white 40%, transparent);
+  border-top: 1px solid color-mix(in lab, white 40%, transparent);
+  border-right: 1px solid color-mix(in lab, black 80%, transparent);
+  border-bottom: 1px solid color-mix(in lab, black 80%, transparent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 4px 12px rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+
+.navList {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(235, 240, 246, 0.85));
+  border: 1px solid color-mix(in lab, white 40%, transparent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 6px 18px rgba(15, 39, 68, 0.25);
+}
+
+.navLink {
+  color: #18314f;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+.navLink:hover {
+  color: var(--color-retro-200);
+  background: rgba(30, 76, 124, 0.12);
+}
+
+.navLink:active {
+  color: #0b1d34;
+  background: rgba(30, 76, 124, 0.25);
+}
+
+.panel {
+  position: relative;
+  background: linear-gradient(180deg, black, color-mix(in lab, var(--color-retro-200) 10%, black));
+  border: 1px solid color-mix(in lab, var(--color-retro-200) 60%, transparent);
+  box-shadow: 0 12px 24px rgba(27, 66, 115, 0.28);
+  overflow: hidden;
+}
+
+.panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(170deg, color-mix(in lab, var(--color-retro-200) 10%, transparent), transparent);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.footer {
+  background: linear-gradient(180deg, color-mix(in lab, var(--color-retro-200) 50%, black) 0%, color-mix(in lab, var(--color-retro-800) 40%, black) 100%);
+  border-top: 4px solid var(--retro-contrast);
+}
