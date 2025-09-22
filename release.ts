@@ -12,10 +12,7 @@ const getArg = (key: string, fallback?: string): string | undefined => {
 const ENVIRONMENT = getArg("env", "development");
 
 dotenv.config({
-  path: path.resolve(
-    process.cwd(),
-    `.env${ENVIRONMENT ? `.${ENVIRONMENT}` : ""}`
-  ),
+  path: path.resolve(process.cwd(), `.env${ENVIRONMENT ? `.${ENVIRONMENT}` : ""}`),
 });
 
 const VITE_BUILD_DIR = getArg("vite", "clientapp/dist")!;
@@ -45,31 +42,14 @@ function main() {
     console.log(`🔨 Building release for ${ENVIRONMENT}...`);
 
     runCommand("bun run build");
-    runCommand("bun run prerender");
-
     cleanReleaseDir();
 
     copyBuildOutput(VITE_BUILD_DIR, path.join(RELEASE_DIR, "clientapp"));
-    copyBuildOutput(
-      `${BACKEND_DIR}/config`,
-      path.join(RELEASE_DIR, "backend/config")
-    );
-    copyBuildOutput(
-      `${BACKEND_DIR}/src`,
-      path.join(RELEASE_DIR, "backend/src")
-    );
-    copyBuildOutput(
-      `${BACKEND_DIR}/package.json`,
-      path.join(RELEASE_DIR, "backend/package.json")
-    );
-    copyBuildOutput(
-      `${BACKEND_DIR}/public`,
-      path.join(RELEASE_DIR, "backend/public")
-    );
-    copyBuildOutput(
-      `${BACKEND_DIR}/types`,
-      path.join(RELEASE_DIR, "backend/types")
-    );
+    copyBuildOutput(`${BACKEND_DIR}/config`, path.join(RELEASE_DIR, "backend/config"));
+    copyBuildOutput(`${BACKEND_DIR}/src`, path.join(RELEASE_DIR, "backend/src"));
+    copyBuildOutput(`${BACKEND_DIR}/package.json`, path.join(RELEASE_DIR, "backend/package.json"));
+    copyBuildOutput(`${BACKEND_DIR}/public`, path.join(RELEASE_DIR, "backend/public"));
+    copyBuildOutput(`${BACKEND_DIR}/types`, path.join(RELEASE_DIR, "backend/types"));
 
     if (DEPLOY_COMMAND) {
       console.log("🚀 Deploying...");
