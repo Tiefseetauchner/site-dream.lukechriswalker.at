@@ -1,10 +1,10 @@
 import { API, CollectionTypeManager, FilesManager, SingleTypeManager, strapi, StrapiClient } from "@strapi/client";
 
-const runWithRetries = async <T>(
-  fn: () => Promise<T>,
-  retries: number,
-  maxRetries: number
-): Promise<T> => {
+const runWithRetries = async <T>(fn: () => Promise<T>, retries: number | undefined, maxRetries: number): Promise<T> => {
+  if (!retries) {
+    retries = maxRetries;
+  }
+
   try {
     return await fn();
   } catch (error) {
@@ -28,57 +28,33 @@ interface ICollectionTypeManager {
 
 class RetryingCollectionTypeManagerAdapter implements ICollectionTypeManager {
   private manager: CollectionTypeManager;
-  private retries: number;
+  private retries: number | undefined;
   private maxRetries: number;
 
-  constructor(
-    manager: CollectionTypeManager,
-    retries = 3,
-    maxRetries = 5
-  ) {
+  constructor(manager: CollectionTypeManager, retries = undefined, maxRetries = 5) {
     this.manager = manager;
     this.retries = retries;
     this.maxRetries = maxRetries;
   }
 
   find(queryParams?: API.BaseQueryParams): Promise<API.DocumentResponseCollection> {
-    return runWithRetries(
-      () => this.manager.find(queryParams),
-      this.retries,
-      this.maxRetries
-    );
+    return runWithRetries(() => this.manager.find(queryParams), this.retries, this.maxRetries);
   }
 
   findOne(documentID: string, queryParams?: API.BaseQueryParams): Promise<API.DocumentResponse> {
-    return runWithRetries(
-      () => this.manager.findOne(documentID, queryParams),
-      this.retries,
-      this.maxRetries
-    );
+    return runWithRetries(() => this.manager.findOne(documentID, queryParams), this.retries, this.maxRetries);
   }
 
   create(data: Record<string, unknown>, queryParams?: API.BaseQueryParams): Promise<API.DocumentResponse> {
-    return runWithRetries(
-      () => this.manager.create(data, queryParams),
-      this.retries,
-      this.maxRetries
-    );
+    return runWithRetries(() => this.manager.create(data, queryParams), this.retries, this.maxRetries);
   }
 
   update(documentID: string, data: Record<string, unknown>, queryParams?: API.BaseQueryParams): Promise<API.DocumentResponse> {
-    return runWithRetries(
-      () => this.manager.update(documentID, data, queryParams),
-      this.retries,
-      this.maxRetries
-    );
+    return runWithRetries(() => this.manager.update(documentID, data, queryParams), this.retries, this.maxRetries);
   }
 
   delete(documentID: string, queryParams?: API.BaseQueryParams): Promise<void> {
-    return runWithRetries(
-      () => this.manager.delete(documentID, queryParams),
-      this.retries,
-      this.maxRetries
-    );
+    return runWithRetries(() => this.manager.delete(documentID, queryParams), this.retries, this.maxRetries);
   }
 }
 
@@ -93,38 +69,22 @@ class RetryingSingleTypeManagerAdapter implements ISingleTypeManager {
   private retries: number;
   private maxRetries: number;
 
-  constructor(
-    manager: SingleTypeManager,
-    retries = 3,
-    maxRetries = 5
-  ) {
+  constructor(manager: SingleTypeManager, retries = 3, maxRetries = 5) {
     this.manager = manager;
     this.retries = retries;
     this.maxRetries = maxRetries;
   }
 
   find(queryParams?: API.BaseQueryParams): Promise<API.DocumentResponse> {
-    return runWithRetries(
-      () => this.manager.find(queryParams),
-      this.retries,
-      this.maxRetries
-    );
+    return runWithRetries(() => this.manager.find(queryParams), this.retries, this.maxRetries);
   }
 
   update(data: Record<string, unknown>, queryParams?: API.BaseQueryParams): Promise<API.DocumentResponse> {
-    return runWithRetries(
-      () => this.manager.update(data, queryParams),
-      this.retries,
-      this.maxRetries
-    );
+    return runWithRetries(() => this.manager.update(data, queryParams), this.retries, this.maxRetries);
   }
 
   delete(queryParams?: API.BaseQueryParams): Promise<void> {
-    return runWithRetries(
-      () => this.manager.delete(queryParams),
-      this.retries,
-      this.maxRetries
-    );
+    return runWithRetries(() => this.manager.delete(queryParams), this.retries, this.maxRetries);
   }
 }
 
@@ -147,29 +107,16 @@ class RetryingStrapiClientAdapter {
   }
 
   fetch(url: string, init?: RequestInit): Promise<Response> {
-    return runWithRetries(
-      () => this.client.fetch(url, init),
-      this.retries,
-      this.maxRetries
-    );
+    return runWithRetries(() => this.client.fetch(url, init), this.retries, this.maxRetries);
   }
 
   collection(resource: string): ICollectionTypeManager {
-    return new RetryingCollectionTypeManagerAdapter(
-      this.client.collection(resource),
-      this.retries,
-      this.maxRetries
-    );
+    return new RetryingCollectionTypeManagerAdapter(this.client.collection(resource), this.retries, this.maxRetries);
   }
 
   single(resource: string): ISingleTypeManager {
-    return new RetryingSingleTypeManagerAdapter(
-      this.client.single(resource),
-      this.retries,
-      this.maxRetries
-    );
+    return new RetryingSingleTypeManagerAdapter(this.client.single(resource), this.retries, this.maxRetries);
   }
-
 }
 
 export const client = (apiUrl?: string, apiToken?: string) => {
