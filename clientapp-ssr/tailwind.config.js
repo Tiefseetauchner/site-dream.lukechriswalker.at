@@ -1,3 +1,8 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-    plugins: [require('tailwind-hamburgers')]
-}
+    content: [],
+    theme: {
+        extend: {},
+    },
+    plugins: [],
+};
