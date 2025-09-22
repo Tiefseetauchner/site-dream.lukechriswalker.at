@@ -88,7 +88,7 @@ export default async function CharacterDetailPage({ params }: CharacterPageProps
 
   return (
     <>
-      <PageMetadata subtitle={character.name ?? undefined} />
+      <PageMetadata subtitle={character.name ?? undefined} description={character.blurb ?? undefined} />
       <div className="space-y-8">
         {character.blurb && (
           <Panel>
