@@ -1,0 +1,10 @@
+import { PropsWithChildren } from "react";
+import styles from "@/styles/retro.module.scss";
+
+export function Panel({ children }: PropsWithChildren) {
+  return (
+    <section className={`${styles.panel} space-y-5 rounded-xl px-7 py-8`}>
+      {children}
+    </section>
+  );
+}
