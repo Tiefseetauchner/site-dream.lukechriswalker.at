@@ -1,6 +1,10 @@
-import { CollectionTypeResponse } from "../../../types/types";
+import { getPageMetadataById, toNextMetadata } from "@/config/pageMetadata";
 import { BooksSwiper } from "@/components/BooksSwiper";
 import { client, resolveMedia } from "@/utils/strapiClient";
+import { CollectionTypeResponse } from "../../../types/types";
+
+const pageMetadata = getPageMetadataById("books");
+export const metadata = toNextMetadata(pageMetadata);
 
 export default async function BooksPage() {
   const data = (await client()

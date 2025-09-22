@@ -1,5 +1,5 @@
+import styles from "@/styles/retro.module.css";
 import { PropsWithChildren } from "react";
-import styles from "@/styles/retro.module.scss";
 
 export function Panel({ children }: PropsWithChildren) {
   return (

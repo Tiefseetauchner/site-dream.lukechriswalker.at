@@ -1,7 +1,10 @@
+import { getPageMetadataById, toNextMetadata } from "@/config/pageMetadata";
+import { Panel } from "@/components/Panel";
 import { routes } from "@/utils/routes";
 import Link from "next/link";
-import styles from "@/styles/retro.module.scss";
-import { Panel } from "@/components/Panel";
+
+const pageMetadata = getPageMetadataById("license");
+export const metadata = toNextMetadata(pageMetadata);
 
 export default function LicensePage() {
   return (
@@ -88,7 +91,7 @@ export default function LicensePage() {
             Tauchner. Lena Tauchner reserves all the rights to all materially
             relevant contents of this website.
           </p>
-          <p className="font-medium">Copyright © 2025 Lena Tauchner.</p>
+          <p className="font-medium">Copyright &copy; 2025 Lena Tauchner.</p>
         </section>
         <section>
           <h2 id="works" className="text-2xl font-semibold mb-2">Works displayed on this website</h2>
@@ -199,3 +202,4 @@ export default function LicensePage() {
     </main>
   );
 }
+
