@@ -10,6 +10,7 @@ const runWithRetries = async <T>(fn: () => Promise<T>, retries: number | undefin
   } catch (error) {
     if (retries > 0) {
       console.warn(`Retrying... (${retries} retries left)`);
+      console.warn(error);
       await new Promise((resolve) => setTimeout(resolve, 1000));
       return runWithRetries(fn, retries - 1, maxRetries);
     } else {
