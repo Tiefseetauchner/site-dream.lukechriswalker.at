@@ -8,10 +8,10 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "generate-api": "cd backend/ && strapi ts:generate-types",
-    "prerender": "cd clientapp/ && bun ./prerender",
-    "copy-types": "bun generate-api && bun copyTypes.ts"
+    "prerender": "cd clientapp/ && node ./prerender",
+    "copy-types": "npm run generate-api && node copyTypes.ts"
   },
-  "packageManager": "bun@1.2.10",
+  "packageManager": "npm@10.9.4",
   "workspaces": [
     "backend",
     "clientapp"
