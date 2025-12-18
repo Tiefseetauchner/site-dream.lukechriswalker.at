@@ -1,7 +1,7 @@
 import { execSync } from "child_process";
-import path from "path";
-import fse from "fs-extra";
 import dotenv from "dotenv";
+import fse from "fs-extra";
+import path from "path";
 
 const args = process.argv.slice(2);
 const getArg = (key: string, fallback?: string): string | undefined => {
@@ -15,7 +15,7 @@ dotenv.config({
   path: path.resolve(process.cwd(), `.env${ENVIRONMENT ? `.${ENVIRONMENT}` : ""}`),
 });
 
-const NEXT_BUILD_DIR = getArg("next", "clientapp/")!;
+const NEXT_BUILD_DIR = getArg("next", "clientapp/.next")!;
 const BACKEND_DIR = getArg("backend", "backend/")!;
 const RELEASE_DIR = getArg("release", "build")!;
 
@@ -45,9 +45,13 @@ function main() {
     cleanReleaseDir();
 
     copyBuildOutput(NEXT_BUILD_DIR, path.join(RELEASE_DIR, "clientapp"));
+    copyBuildOutput(`${NEXT_BUILD_DIR}/public`, path.join(RELEASE_DIR, "clientapp/public"));
+    copyBuildOutput(`${NEXT_BUILD_DIR}/package.json`, path.join(RELEASE_DIR, "clientapp/package.json"));
+    copyBuildOutput(`${NEXT_BUILD_DIR}/package-lock.json`, path.join(RELEASE_DIR, "clientapp/package-lock.json"));
     copyBuildOutput(`${BACKEND_DIR}/config`, path.join(RELEASE_DIR, "backend/config"));
     copyBuildOutput(`${BACKEND_DIR}/src`, path.join(RELEASE_DIR, "backend/src"));
     copyBuildOutput(`${BACKEND_DIR}/package.json`, path.join(RELEASE_DIR, "backend/package.json"));
+    copyBuildOutput(`${BACKEND_DIR}/package-lock.json`, path.join(RELEASE_DIR, "backend/package-lock.json"));
     copyBuildOutput(`${BACKEND_DIR}/public`, path.join(RELEASE_DIR, "backend/public"));
     copyBuildOutput(`${BACKEND_DIR}/types`, path.join(RELEASE_DIR, "backend/types"));
 
