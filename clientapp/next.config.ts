@@ -4,7 +4,13 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactStrictMode: true,
   images: {
-    remotePatterns: [new URL('https://dreams.lukechriswalker.at/admin/**')],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "dreams.lukechriswalker.at",
+        pathname: "/admin/**",
+      },
+    ],
   },
 };
 

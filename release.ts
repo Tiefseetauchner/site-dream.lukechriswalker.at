@@ -16,7 +16,8 @@ dotenv.config({
 });
 
 const NEXT_BUILD_DIR = getArg("next", "clientapp/.next")!;
-const BACKEND_DIR = getArg("backend", "backend/")!;
+const CLIENTAPP_DIR = getArg("clientapp", "clientapp")!;
+const BACKEND_DIR = getArg("backend", "backend")!;
 const RELEASE_DIR = getArg("release", "build")!;
 
 const DEPLOY_COMMAND = getArg("deploy");
@@ -37,6 +38,15 @@ function copyBuildOutput(src: string, dest: string) {
   fse.copySync(src, dest, { overwrite: true });
 }
 
+function copyIfExists(src: string, dest: string) {
+  if (!fse.existsSync(src)) {
+    console.warn(`Skipping ${src} (not found)`);
+    return;
+  }
+
+  copyBuildOutput(src, dest);
+}
+
 function main() {
   try {
     console.log(`🔨 Building release for ${ENVIRONMENT}...`);
@@ -44,16 +54,27 @@ function main() {
     runCommand("bun run build");
     cleanReleaseDir();
 
-    copyBuildOutput(NEXT_BUILD_DIR, path.join(RELEASE_DIR, "clientapp"));
-    copyBuildOutput(`${NEXT_BUILD_DIR}/public`, path.join(RELEASE_DIR, "clientapp/public"));
-    copyBuildOutput(`${NEXT_BUILD_DIR}/package.json`, path.join(RELEASE_DIR, "clientapp/package.json"));
-    copyBuildOutput(`${NEXT_BUILD_DIR}/package-lock.json`, path.join(RELEASE_DIR, "clientapp/package-lock.json"));
-    copyBuildOutput(`${BACKEND_DIR}/config`, path.join(RELEASE_DIR, "backend/config"));
-    copyBuildOutput(`${BACKEND_DIR}/src`, path.join(RELEASE_DIR, "backend/src"));
-    copyBuildOutput(`${BACKEND_DIR}/package.json`, path.join(RELEASE_DIR, "backend/package.json"));
-    copyBuildOutput(`${BACKEND_DIR}/package-lock.json`, path.join(RELEASE_DIR, "backend/package-lock.json"));
-    copyBuildOutput(`${BACKEND_DIR}/public`, path.join(RELEASE_DIR, "backend/public"));
-    copyBuildOutput(`${BACKEND_DIR}/types`, path.join(RELEASE_DIR, "backend/types"));
+    const clientappReleaseDir = path.join(RELEASE_DIR, "clientapp");
+    const backendReleaseDir = path.join(RELEASE_DIR, "backend");
+
+    copyBuildOutput(NEXT_BUILD_DIR, path.join(clientappReleaseDir, ".next"));
+    copyIfExists(path.join(CLIENTAPP_DIR, "public"), path.join(clientappReleaseDir, "public"));
+    copyIfExists(path.join(CLIENTAPP_DIR, "package.json"), path.join(clientappReleaseDir, "package.json"));
+    copyIfExists(path.join(CLIENTAPP_DIR, "bun.lock"), path.join(clientappReleaseDir, "bun.lock"));
+
+    copyIfExists(path.join(BACKEND_DIR, ".strapi"), path.join(backendReleaseDir, ".strapi"));
+    copyIfExists(path.join(BACKEND_DIR, "config"), path.join(backendReleaseDir, "config"));
+    copyIfExists(path.join(BACKEND_DIR, "dist"), path.join(backendReleaseDir, "dist"));
+    copyIfExists(path.join(BACKEND_DIR, "src"), path.join(backendReleaseDir, "src"));
+    copyIfExists(path.join(BACKEND_DIR, "package.json"), path.join(backendReleaseDir, "package.json"));
+    copyIfExists(path.join(BACKEND_DIR, "bun.lock"), path.join(backendReleaseDir, "bun.lock"));
+    copyIfExists(path.join(BACKEND_DIR, "public"), path.join(backendReleaseDir, "public"));
+    copyIfExists(path.join(BACKEND_DIR, "types"), path.join(backendReleaseDir, "types"));
+    copyIfExists(path.join(BACKEND_DIR, "favicon.png"), path.join(backendReleaseDir, "favicon.png"));
+    copyIfExists(path.join(BACKEND_DIR, "tsconfig.json"), path.join(backendReleaseDir, "tsconfig.json"));
+    copyIfExists("ecosystem.config.cjs", path.join(RELEASE_DIR, "ecosystem.config.cjs"));
+    copyIfExists("./stage-clientapp.sh", path.join(RELEASE_DIR, "stage-clientapp.sh"));
+    copyIfExists("./stage-backend.sh", path.join(RELEASE_DIR, "stage-backend.sh"));
 
     if (DEPLOY_COMMAND) {
       console.log("🚀 Deploying...");
