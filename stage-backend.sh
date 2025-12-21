@@ -29,6 +29,7 @@ require_cmd ln
 require_cmd mv
 require_cmd mkdir
 require_cmd date
+require_cmd rsync
 
 [[ -d "$STAGING" ]] || die "Staging dir not found: $STAGING (rsync into it first)"
 [[ -f "$STAGING/package.json" ]] || die "No package.json in staging: $STAGING"
@@ -36,6 +37,44 @@ require_cmd date
 [[ -d "$STAGING/node_modules" ]] && log "Note: node_modules exists in staging. That's usually pointless. (We'll still install.)"
 
 mkdir -p "$RELEASES"
+
+# ---- PUBLIC SYNC ----
+get_latest_release_dir() {
+  local latest=""
+
+  if [[ -L "$CURRENT" || -d "$CURRENT" ]]; then
+    latest="$(readlink -f "$CURRENT" 2>/dev/null || true)"
+  fi
+
+  if [[ -z "$latest" && -d "$RELEASES" ]]; then
+    local newest_name
+    newest_name="$(ls -1 "$RELEASES" 2>/dev/null | sort | tail -n 1)"
+    [[ -n "$newest_name" ]] && latest="$RELEASES/$newest_name"
+  fi
+
+  [[ -n "$latest" ]] && printf '%s\n' "$latest"
+}
+
+sync_public_from_previous_release() {
+  local previous_release
+  previous_release="$(get_latest_release_dir)"
+
+  if [[ -z "$previous_release" ]]; then
+    log "No previous release to copy public assets from."
+    return
+  fi
+
+  if [[ ! -d "$previous_release/public" ]]; then
+    log "Previous release missing public dir: $previous_release/public (skipping)."
+    return
+  fi
+
+  log "Copying public dir from ${previous_release}/public -> ${STAGING}/public"
+  mkdir -p "$STAGING/public"
+  rsync -a --delete "$previous_release/public/" "$STAGING/public/"
+}
+
+sync_public_from_previous_release
 
 # ---- DEP INSTALL IN STAGING ----
 log "Installing deps in staging (bun i --frozen-lockfile)…"

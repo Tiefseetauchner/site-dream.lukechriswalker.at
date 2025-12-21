@@ -59,6 +59,7 @@ function main() {
 
     copyBuildOutput(NEXT_BUILD_DIR, path.join(clientappReleaseDir, ".next"));
     copyIfExists(path.join(CLIENTAPP_DIR, "public"), path.join(clientappReleaseDir, "public"));
+    copyIfExists(path.join(CLIENTAPP_DIR, "next.config.ts"), path.join(clientappReleaseDir, "next.config.ts"));
     copyIfExists(path.join(CLIENTAPP_DIR, "package.json"), path.join(clientappReleaseDir, "package.json"));
     copyIfExists(path.join(CLIENTAPP_DIR, "bun.lock"), path.join(clientappReleaseDir, "bun.lock"));
 
