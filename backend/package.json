@@ -31,7 +31,7 @@
   },
   "overrides": {
     "strapi-plugin-ezforms": {
-      "@strapi/strapi": "^5.12.7"
+      "@strapi/strapi": "^5.33.0"
     }
   },
   "devDependencies": {
