@@ -167,14 +167,16 @@ export default async function BookDetailPage({ params }: BookPageProps) {
               </div>
             )}
             {book.content_warnings && (
-              <div className="space-y-2">
-                <h3 className="text-lg font-semibold uppercase tracking-widest text-slate-200">
+              <details
+                className="group rounded-lg border border-white/10 bg-white/5 p-3"
+              >
+                <summary className="cursor-pointer text-lg font-semibold uppercase tracking-widest text-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80">
                   Content Warnings
-                </h3>
-                <p className="whitespace-pre-wrap text-sm leading-relaxed text-slate-100">
+                </summary>
+                <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-slate-100">
                   {book.content_warnings}
                 </p>
-              </div>
+              </details>
             )}
             {actions.length > 0 && (
               <div className="space-y-3">

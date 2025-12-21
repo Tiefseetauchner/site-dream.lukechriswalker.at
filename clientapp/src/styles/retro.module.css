@@ -95,6 +95,54 @@
   border-radius: inherit;
 }
 
+.homeHero {
+  position: relative;
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+}
+
+.homeGlow {
+  position: absolute;
+  inset: -30% 20% 40% -10%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.18), transparent 60%);
+  filter: blur(8px);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.homeCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  padding: 0.65rem 1.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.2), rgba(10, 24, 48, 0.6));
+  box-shadow: 0 8px 24px rgba(10, 24, 48, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.homeCta:hover {
+  transform: translateY(-1px);
+  border-color: #fff;
+  box-shadow: 0 12px 28px rgba(10, 24, 48, 0.5);
+}
+
+.homeCta:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8), 0 12px 28px rgba(10, 24, 48, 0.5);
+}
+
+.homeAside {
+  align-self: center;
+  transform: translateY(8px);
+}
+
 .footer {
   background: linear-gradient(180deg, color-mix(in lab, var(--color-retro-200) 50%, black) 0%, color-mix(in lab, var(--color-retro-800) 40%, black) 100%);
   border-top: 4px solid var(--retro-contrast);
