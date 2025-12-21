@@ -35,7 +35,8 @@ async function fetchBook(slug: string): Promise<BookEntity | null> {
   return response.data?.[0] ?? null;
 }
 
-const baseMetadata = toNextMetadata(getPageMetadataById("bookDetail"));
+const bookDetailMetadata = getPageMetadataById("bookDetail");
+const baseMetadata = toNextMetadata(bookDetailMetadata);
 
 type BookPageParams = { slug: string; };
 
@@ -77,10 +78,38 @@ export default async function BookDetailPage({ params }: BookPageProps) {
   const links = Array.isArray(book.links)
     ? (book.links as BookLink[])
     : [];
+  const actions = links
+    .map((link) => {
+      const label = link.display_name?.trim() || "Visit link";
+      const normalized = label.toLowerCase();
+      const variant = ["read online", "get the ebook", "get ebook", "ebook", "e-book"].includes(
+        normalized,
+      )
+        ? "primary"
+        : ["paperback", "license"].includes(normalized)
+          ? "secondary"
+          : "secondary";
+
+      return {
+        id: (link as { id?: number; }).id ?? link.link,
+        label,
+        href: link.link,
+        variant,
+      };
+    })
+    .sort((left, right) => {
+      if (left.variant === right.variant) {
+        return left.label.localeCompare(right.label);
+      }
+      return left.variant === "primary" ? -1 : 1;
+    });
 
   return (
     <>
-      <PageMetadata subtitle={book.title ?? undefined} />
+      <PageMetadata
+        title={book.title ?? undefined}
+        subtitle={bookDetailMetadata.subtitle}
+      />
       <div className="space-y-8">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,320px)_1fr]">
           <Panel>
@@ -136,25 +165,28 @@ export default async function BookDetailPage({ params }: BookPageProps) {
                 </p>
               </div>
             )}
-            {links.length > 0 && (
-              <div className="space-y-2">
+            {actions.length > 0 && (
+              <div className="space-y-3">
                 <h3 className="text-lg font-semibold uppercase tracking-widest text-slate-200">
-                  Links
+                  Read Yourself!
                 </h3>
-                <ul className="space-y-1 text-sm text-slate-100">
-                  {links.map((link) => (
-                    <li key={(link as { id?: number; }).id ?? link.link}>
-                      <a
-                        href={link.link}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        className="underline underline-offset-4 hover:text-slate-50"
-                      >
-                        {link.display_name ?? link.link}
-                      </a>
-                    </li>
+                <div className="flex flex-wrap gap-3">
+                  {actions.map((action) => (
+                    <a
+                      key={action.id}
+                      href={action.href}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className={
+                        action.variant === "primary"
+                          ? "rounded-md bg-white/90 px-4 py-2 text-sm font-semibold uppercase tracking-widest text-slate-900 shadow-sm transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                          : "rounded-md border border-white/40 px-4 py-2 text-sm font-semibold uppercase tracking-widest text-white transition hover:border-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                      }
+                    >
+                      {action.label}
+                    </a>
                   ))}
-                </ul>
+                </div>
               </div>
             )}
           </Panel>
