@@ -132,6 +132,17 @@ export default async function BookDetailPage({ params }: BookPageProps) {
                 {book.title}
               </h2>
             )}
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-300">
+              <Link
+                href={routes.books}
+                className="underline underline-offset-4 hover:text-slate-50"
+              >
+                Dreams series
+              </Link>
+              {typeof book.order === "number" && book.order > 0
+                ? ` · Book ${book.order}`
+                : ""}
+            </p>
             {authors.length > 0 && (
               <div className="space-y-2">
                 <h3 className="text-lg font-semibold uppercase tracking-widest text-slate-200">
@@ -194,7 +205,9 @@ export default async function BookDetailPage({ params }: BookPageProps) {
         {book.description && (
           <Panel>
             <h3 className="text-2xl font-semibold text-white">Description</h3>
-            <BlocksRenderer content={book.description as BlocksContent} />
+            <div className="max-w-2xl text-base leading-relaxed text-slate-100">
+              <BlocksRenderer content={book.description as BlocksContent} />
+            </div>
           </Panel>
         )}
       </div>

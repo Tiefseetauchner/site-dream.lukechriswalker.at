@@ -11,3 +11,7 @@
   --color-retro-800: #503d0a;
   --color-retro-contrast: #751a44;
 }
+
+html {
+  font-size: 125%;
+}
