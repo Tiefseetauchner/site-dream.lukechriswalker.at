@@ -2,11 +2,7 @@
   "private": true,
   "name": "site-dream.lukechriswalker.at",
   "devDependencies": {
-<<<<<<< HEAD
-    "turbo": "^2.5.6"
-=======
     "turbo": "^2.6.3"
->>>>>>> main
   },
   "scripts": {
     "build": "turbo run build",
@@ -31,10 +27,6 @@
   "dependencies": {
     "@types/fs-extra": "^11.0.4",
     "fs-extra": "^11.3.2",
-<<<<<<< HEAD
-    "generate-license-file": "^4.1.0"
-=======
     "generate-license-file": "^4.1.1"
->>>>>>> main
   }
 }
