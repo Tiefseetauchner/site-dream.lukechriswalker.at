@@ -12,7 +12,7 @@ import { CollectionTypeResponse } from "../../../../types/types";
 
 type AuthorResponse = CollectionTypeResponse<"api::author.author">;
 type AuthorEntity = AuthorResponse["data"][number];
-type AuthorBook = { id?: number; title?: string; slug?: string | null };
+type AuthorBook = { id?: number; title?: string; slug?: string | null; };
 type AuthorMedia = {
   url?: string | null;
   alternativeText?: string | null;
@@ -25,9 +25,9 @@ type BlocksContent = Parameters<typeof BlocksRenderer>[0] extends {
   ? T
   : never;
 
-type AuthorPageParams = { slug: string };
+type AuthorPageParams = { slug: string; };
 
-type AuthorPageProps = { params: AuthorPageParams };
+type AuthorPageProps = { params: Promise<AuthorPageParams>; };
 
 async function fetchAuthor(slug: string): Promise<AuthorEntity | null> {
   const response = (await client()
@@ -47,7 +47,7 @@ async function fetchAuthor(slug: string): Promise<AuthorEntity | null> {
 const baseMetadata = toNextMetadata(getPageMetadataById("authorDetail"));
 
 export async function generateMetadata({ params }: AuthorPageProps): Promise<Metadata> {
-  const author = await fetchAuthor(params.slug);
+  const author = await fetchAuthor((await params).slug);
 
   if (!author?.name) {
     return baseMetadata;
@@ -60,7 +60,7 @@ export async function generateMetadata({ params }: AuthorPageProps): Promise<Met
 }
 
 export default async function AuthorDetailPage({ params }: AuthorPageProps) {
-  const author = await fetchAuthor(params.slug);
+  const author = await fetchAuthor((await params).slug);
 
   if (!author) {
     notFound();
@@ -74,13 +74,13 @@ export default async function AuthorDetailPage({ params }: AuthorPageProps) {
   const profileUrl = profilePicture?.url ?? undefined;
   const profileImage = profileUrl
     ? {
-        url: resolveMedia(profileUrl),
-        alternativeText:
-          profilePicture?.alternativeText ??
-          `${author.name ?? "Author"} portrait`,
-        width: profilePicture?.width ?? 320,
-        height: profilePicture?.height ?? 400,
-      }
+      url: resolveMedia(profileUrl),
+      alternativeText:
+        profilePicture?.alternativeText ??
+        `${author.name ?? "Author"} portrait`,
+      width: profilePicture?.width ?? 320,
+      height: profilePicture?.height ?? 400,
+    }
     : null;
 
   return (

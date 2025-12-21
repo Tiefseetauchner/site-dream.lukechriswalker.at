@@ -12,8 +12,8 @@ import { CollectionTypeResponse } from "../../../../types/types";
 
 type BookResponse = CollectionTypeResponse<"api::book.book">;
 type BookEntity = BookResponse["data"][number];
-type BookAuthor = { name?: string; slug?: string | null };
-type BookLink = { id?: number; display_name?: string | null; link: string };
+type BookAuthor = { name?: string; slug?: string | null; };
+type BookLink = { id?: number; display_name?: string | null; link: string; };
 type BlocksContent = Parameters<typeof BlocksRenderer>[0] extends {
   content: infer T;
 }
@@ -37,12 +37,12 @@ async function fetchBook(slug: string): Promise<BookEntity | null> {
 
 const baseMetadata = toNextMetadata(getPageMetadataById("bookDetail"));
 
-type BookPageParams = { slug: string };
+type BookPageParams = { slug: string; };
 
-type BookPageProps = { params: BookPageParams };
+type BookPageProps = { params: Promise<BookPageParams>; };
 
 export async function generateMetadata({ params }: BookPageProps): Promise<Metadata> {
-  const book = await fetchBook(params.slug);
+  const book = await fetchBook((await params).slug);
 
   if (!book?.title) {
     return baseMetadata;
@@ -55,7 +55,7 @@ export async function generateMetadata({ params }: BookPageProps): Promise<Metad
 }
 
 export default async function BookDetailPage({ params }: BookPageProps) {
-  const book = await fetchBook(params.slug);
+  const book = await fetchBook((await params).slug);
 
   if (!book) {
     notFound();
@@ -63,12 +63,12 @@ export default async function BookDetailPage({ params }: BookPageProps) {
 
   const coverImage = book.cover_image
     ? {
-        url: resolveMedia(book.cover_image.url),
-        alternativeText:
-          book.cover_image.alternativeText ?? book.title ?? "Book cover",
-        width: book.cover_image.width ?? 600,
-        height: book.cover_image.height ?? 900,
-      }
+      url: resolveMedia(book.cover_image.url),
+      alternativeText:
+        book.cover_image.alternativeText ?? book.title ?? "Book cover",
+      width: book.cover_image.width ?? 600,
+      height: book.cover_image.height ?? 900,
+    }
     : null;
 
   const authors = Array.isArray(book.authors)
@@ -143,7 +143,7 @@ export default async function BookDetailPage({ params }: BookPageProps) {
                 </h3>
                 <ul className="space-y-1 text-sm text-slate-100">
                   {links.map((link) => (
-                    <li key={(link as { id?: number }).id ?? link.link}>
+                    <li key={(link as { id?: number; }).id ?? link.link}>
                       <a
                         href={link.link}
                         target="_blank"
