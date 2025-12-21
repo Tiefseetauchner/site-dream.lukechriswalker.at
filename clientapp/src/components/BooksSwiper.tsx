@@ -46,9 +46,9 @@ export function BooksSwiper({ books }: { books: SwiperBook[]; }) {
           <SwiperSlide key={book.slug} style={{ overflow: "visible" }}>
             <Link
               href={`/books/${book.slug}`}
-              className="group block rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-retro-200 focus-visible:ring-offset-4 focus-visible:ring-offset-transparent"
+              className="group block cursor-pointer rounded-md transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_12px_28px_rgba(0,0,0,0.3)] focus-visible:-translate-y-1 focus-visible:shadow-[0_12px_28px_rgba(0,0,0,0.3)] active:-translate-y-0.5 active:shadow-[0_8px_18px_rgba(0,0,0,0.2)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-retro-200 focus-visible:ring-offset-4 focus-visible:ring-offset-transparent"
             >
-              <div className="book-card relative rounded-md transition-transform duration-200 ease-out group-hover:-translate-y-1 group-hover:shadow-[0_12px_28px_rgba(0,0,0,0.3)] group-focus-visible:-translate-y-1 group-focus-visible:shadow-[0_12px_28px_rgba(0,0,0,0.3)] group-active:-translate-y-0.5 group-active:shadow-[0_8px_18px_rgba(0,0,0,0.2)]">
+              <div className="book-card relative rounded-md">
                 <Image
                   src={book.cover_image.url}
                   alt={book.cover_image.alternativeText}
