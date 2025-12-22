@@ -51,7 +51,7 @@ export function BooksSwiper({ books }: { books: SwiperBook[]; }) {
               <div className="book-card relative rounded-md">
                 <Image
                   src={book.cover_image.url}
-                  alt={book.cover_image.alternativeText}
+                  alt={book.cover_image.alternativeText || book.title || "Book cover"}
                   width={book.cover_image.width}
                   height={book.cover_image.height}
                   className="rounded-md"
