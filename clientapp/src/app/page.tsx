@@ -1,20 +1,18 @@
-import { getPageMetadataById, toNextMetadata } from "@/config/pageMetadata";
-import Link from "next/link";
 import { Panel } from "@/components/Panel";
+import { getPageMetadataById, toNextMetadata } from "@/config/pageMetadata";
+import { tt2020 } from "@/fonts/fonts";
 import styles from "@/styles/retro.module.css";
+import { routes } from "@/utils/routes";
 import { client } from "@/utils/strapiClient";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
+import Link from "next/link";
 import { SingleTypeResponse } from "../../types/types";
-import { routes } from "@/utils/routes";
-import { tt2020 } from "@/fonts/fonts";
 
 const pageMetadata = getPageMetadataById("home");
 export const metadata = toNextMetadata(pageMetadata);
 
 export default async function Home() {
-  const data = (await client()
-    .single("home-page")
-    .find()) as unknown as SingleTypeResponse<"api::home-page.home-page">;
+  const data = (await client().single("home-page").find()) as unknown as SingleTypeResponse<"api::home-page.home-page">;
 
   return (
     <div className="space-y-10">
@@ -24,10 +22,7 @@ export default async function Home() {
           <div className="space-y-6">
             <BlocksRenderer content={data.data.left_text!} />
             <div>
-              <Link
-                href={routes.book("dream")}
-                className={`${tt2020.className} ${styles.homeCta}`}
-              >
+              <Link href={routes.book("dream")} className={`${tt2020.className} ${styles.homeCta}`}>
                 Start with Dream
               </Link>
             </div>

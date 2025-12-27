@@ -1,27 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { Utils, UID, Schema } from "@strapi/strapi";
+import type { Schema, UID, Utils } from "@strapi/strapi";
 
 export type ID = `${number}` | number;
-export type BooleanValue =
-  | boolean
-  | "true"
-  | "false"
-  | "t"
-  | "f"
-  | "1"
-  | "0"
-  | 1
-  | 0;
+export type BooleanValue = boolean | "true" | "false" | "t" | "f" | "1" | "0" | 1 | 0;
 export type NumberValue = string | number;
 export type DateValue = Schema.Attribute.DateValue | number;
 export type TimeValue = Schema.Attribute.TimeValue | number;
 export type DateTimeValue = Schema.Attribute.DateTimeValue | number;
 export type TimeStampValue = Schema.Attribute.TimestampValue;
 
-type OriginalGetValue<
-  TAttribute extends Schema.Attribute.Attribute,
-  TGuard = unknown,
-> = Utils.Guard.Never<
+type OriginalGetValue<TAttribute extends Schema.Attribute.Attribute, TGuard = unknown> = Utils.Guard.Never<
   | Schema.Attribute.GetBigIntegerValue<TAttribute>
   | Schema.Attribute.GetBooleanValue<TAttribute>
   | Schema.Attribute.GetBlocksValue<TAttribute>
@@ -47,39 +35,18 @@ type OriginalGetValue<
   TGuard
 >;
 
-type OriginalGetAll<TSchemaUID extends UID.Schema> = Utils.Get<
-  Schema.Schemas[TSchemaUID],
-  "attributes"
->;
-type OriginalGet<
-  TSchemaUID extends UID.Schema,
-  TKey extends OriginalGetKeys<TSchemaUID>,
-> = Utils.Get<OriginalGetAll<TSchemaUID>, TKey>;
+type OriginalGetAll<TSchemaUID extends UID.Schema> = Utils.Get<Schema.Schemas[TSchemaUID], "attributes">;
+type OriginalGet<TSchemaUID extends UID.Schema, TKey extends OriginalGetKeys<TSchemaUID>> = Utils.Get<OriginalGetAll<TSchemaUID>, TKey>;
 
-type OriginalGetRequiredKeys<TSchemaUID extends UID.Schema> =
-  Utils.Object.KeysBy<
-    OriginalGetAll<TSchemaUID>,
-    Schema.Attribute.Required,
-    string
-  >;
-type OriginalGetOptionalKeys<TSchemaUID extends UID.Schema> =
-  Utils.Object.KeysExcept<
-    OriginalGetAll<TSchemaUID>,
-    Schema.Attribute.Required,
-    string
-  >;
+type OriginalGetRequiredKeys<TSchemaUID extends UID.Schema> = Utils.Object.KeysBy<OriginalGetAll<TSchemaUID>, Schema.Attribute.Required, string>;
+type OriginalGetOptionalKeys<TSchemaUID extends UID.Schema> = Utils.Object.KeysExcept<OriginalGetAll<TSchemaUID>, Schema.Attribute.Required, string>;
 
-type OriginalGetKeys<TSchemaUID extends UID.Schema> =
-  keyof OriginalGetAll<TSchemaUID> & string;
+type OriginalGetKeys<TSchemaUID extends UID.Schema> = keyof OriginalGetAll<TSchemaUID> & string;
 
 export type GetValues<TSchemaUID extends UID.Schema> = {
-  [TKey in OriginalGetOptionalKeys<TSchemaUID>]?: GetValue<
-    OriginalGet<TSchemaUID, TKey>
-  >;
+  [TKey in OriginalGetOptionalKeys<TSchemaUID>]?: GetValue<OriginalGet<TSchemaUID, TKey>>;
 } & {
-  [TKey in OriginalGetRequiredKeys<TSchemaUID>]-?: GetValue<
-    OriginalGet<TSchemaUID, TKey>
-  >;
+  [TKey in OriginalGetRequiredKeys<TSchemaUID>]-?: GetValue<OriginalGet<TSchemaUID, TKey>>;
 };
 
 /**
@@ -96,9 +63,7 @@ export type GetValue<TAttribute> = TAttribute extends Schema.Attribute.Attribute
           [Utils.Extends<TAttribute, Schema.Attribute.OfType<"relation">>, any],
           [
             Utils.Extends<TAttribute, Schema.Attribute.OfType<"dynamiczone">>,
-            TAttribute extends Schema.Attribute.DynamicZone<
-              infer TComponentsUIDs
-            >
+            TAttribute extends Schema.Attribute.DynamicZone<infer TComponentsUIDs>
               ? Array<
                   Utils.Array.Values<TComponentsUIDs> extends infer TComponentUID
                     ? TComponentUID extends UID.Component
@@ -112,10 +77,7 @@ export type GetValue<TAttribute> = TAttribute extends Schema.Attribute.Attribute
           ],
           [
             Utils.Extends<TAttribute, Schema.Attribute.OfType<"component">>,
-            TAttribute extends Schema.Attribute.Component<
-              infer TComponentUID,
-              infer TRepeatable
-            >
+            TAttribute extends Schema.Attribute.Component<infer TComponentUID, infer TRepeatable>
               ? TComponentUID extends UID.Component
                 ? GetValues<TComponentUID> extends infer TValues
                   ? Utils.If<TRepeatable, TValues[], TValues>
@@ -131,9 +93,7 @@ export type GetValue<TAttribute> = TAttribute extends Schema.Attribute.Attribute
     >
   : unknown;
 
-export interface CollectionTypeResponse<
-  TContentTypeUID extends UID.ContentType,
-> {
+export interface CollectionTypeResponse<TContentTypeUID extends UID.ContentType> {
   data: [GetValues<TContentTypeUID>];
   meta: any;
 }

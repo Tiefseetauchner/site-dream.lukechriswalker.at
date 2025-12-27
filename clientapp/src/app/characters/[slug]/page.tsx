@@ -12,7 +12,7 @@ import { CollectionTypeResponse } from "../../../../types/types";
 
 type CharacterResponse = CollectionTypeResponse<"api::character.character">;
 type CharacterEntity = CharacterResponse["data"][number];
-type CharacterBook = { id?: number; title?: string; slug?: string | null; };
+type CharacterBook = { id?: number; title?: string; slug?: string | null };
 type CharacterMedia = {
   url?: string | null;
   alternativeText?: string | null;
@@ -25,9 +25,9 @@ type BlocksContent = Parameters<typeof BlocksRenderer>[0] extends {
   ? T
   : never;
 
-type CharacterPageParams = { slug: string; };
+type CharacterPageParams = { slug: string };
 
-type CharacterPageProps = { params: Promise<CharacterPageParams>; };
+type CharacterPageProps = { params: Promise<CharacterPageParams> };
 
 async function fetchCharacter(slug: string): Promise<CharacterEntity | null> {
   const response = (await client()
@@ -74,11 +74,11 @@ export default async function CharacterDetailPage({ params }: CharacterPageProps
 
   const profileImage = profileUrl
     ? {
-      url: resolveMedia(profileUrl),
-      alternativeText: profilePicture?.alternativeText ?? `${character.name ?? "Character"} portrait`,
-      width: profilePicture?.width ?? 400,
-      height: profilePicture?.height ?? 600,
-    }
+        url: resolveMedia(profileUrl),
+        alternativeText: profilePicture?.alternativeText ?? `${character.name ?? "Character"} portrait`,
+        width: profilePicture?.width ?? 400,
+        height: profilePicture?.height ?? 600,
+      }
     : null;
 
   const birthday = character.birthday ? new Date(character.birthday as string) : null;

@@ -1,5 +1,5 @@
-import { getPageMetadataById, toNextMetadata } from "@/config/pageMetadata";
 import { BooksSwiper } from "@/components/BooksSwiper";
+import { getPageMetadataById, toNextMetadata } from "@/config/pageMetadata";
 import { client, resolveMedia } from "@/utils/strapiClient";
 import { CollectionTypeResponse } from "../../../types/types";
 
@@ -29,9 +29,7 @@ export default async function BooksPage() {
 
   return (
     <div className="space-y-6">
-      <p className="text-sm text-stone-200">
-        Select a book to view details and reading options.
-      </p>
+      <p className="text-sm text-stone-200">Select a book to view details and reading options.</p>
       <BooksSwiper books={books} />
     </div>
   );

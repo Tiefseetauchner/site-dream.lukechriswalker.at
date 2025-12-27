@@ -2,15 +2,7 @@
 
 import { resolvePageMetadata, type PageMetadata } from "@/config/pageMetadata";
 import { usePathname } from "next/navigation";
-import {
-  createContext,
-  type PropsWithChildren,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type PropsWithChildren } from "react";
 
 export type PageMetadataUpdate = Partial<Pick<PageMetadata, "title" | "subtitle" | "description">>;
 
@@ -22,9 +14,7 @@ type PageMetadataContextValue = {
 const PageMetadataContext = createContext<PageMetadataContextValue | null>(null);
 
 function sanitizeUpdate(update: PageMetadataUpdate): PageMetadataUpdate {
-  return Object.fromEntries(
-    Object.entries(update).filter(([, value]) => value !== undefined && value !== null),
-  ) as PageMetadataUpdate;
+  return Object.fromEntries(Object.entries(update).filter(([, value]) => value !== undefined && value !== null)) as PageMetadataUpdate;
 }
 
 export function PageMetadataProvider({ children }: PropsWithChildren) {
@@ -54,14 +44,10 @@ export function PageMetadataProvider({ children }: PropsWithChildren) {
       metadata,
       updateMetadata,
     }),
-    [metadata, updateMetadata],
+    [metadata, updateMetadata]
   );
 
-  return (
-    <PageMetadataContext.Provider value={value}>
-      {children}
-    </PageMetadataContext.Provider>
-  );
+  return <PageMetadataContext.Provider value={value}>{children}</PageMetadataContext.Provider>;
 }
 
 export function usePageMetadata(): PageMetadataContextValue {

@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { Panel } from "@/components/Panel";
 import { getPageMetadataById, toNextMetadata } from "@/config/pageMetadata";
 import { routes } from "@/utils/routes";
 import { client } from "@/utils/strapiClient";
+import Link from "next/link";
 import { CollectionTypeResponse } from "../../../types/types";
 
 type CharacterResponse = CollectionTypeResponse<"api::character.character">;
@@ -18,9 +18,7 @@ export default async function CharactersPage() {
       populate: ["profile_picture"],
     })) as unknown as CharacterResponse;
 
-  const characters = Array.isArray(response.data)
-    ? (response.data as CharacterEntity[])
-    : [];
+  const characters = Array.isArray(response.data) ? (response.data as CharacterEntity[]) : [];
 
   return (
     <div className="space-y-8">
@@ -41,15 +39,9 @@ export default async function CharactersPage() {
                   {character.name}
                 </Link>
               ) : (
-                <h2 className="text-2xl font-semibold tracking-wide text-white">
-                  {character.name}
-                </h2>
+                <h2 className="text-2xl font-semibold tracking-wide text-white">{character.name}</h2>
               )}
-              {character.blurb && (
-                <p className="text-sm italic leading-relaxed text-stone-200">
-                  {character.blurb}
-                </p>
-              )}
+              {character.blurb && <p className="text-sm italic leading-relaxed text-stone-200">{character.blurb}</p>}
             </div>
           </Panel>
         ))}

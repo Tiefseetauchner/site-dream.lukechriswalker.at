@@ -1,7 +1,7 @@
 "use client";
 
-import { FormEvent, useState } from "react";
 import styles from "@/styles/retro.module.css";
+import { FormEvent, useState } from "react";
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
@@ -47,43 +47,21 @@ export function ContactForm() {
         <label className={`${styles.formLabel} text-sm font-semibold uppercase`} htmlFor="contact-name">
           Name
         </label>
-        <input
-          id="contact-name"
-          name="name"
-          type="text"
-          required
-          className={styles.formField}
-        />
+        <input id="contact-name" name="name" type="text" required className={styles.formField} />
       </div>
       <div className="space-y-1">
         <label className={`${styles.formLabel} text-sm font-semibold uppercase`} htmlFor="contact-email">
           Email address
         </label>
-        <input
-          id="contact-email"
-          name="email"
-          type="email"
-          required
-          className={styles.formField}
-        />
+        <input id="contact-email" name="email" type="email" required className={styles.formField} />
       </div>
       <div className="space-y-1">
         <label className={`${styles.formLabel} text-sm font-semibold uppercase`} htmlFor="contact-message">
           Message
         </label>
-        <textarea
-          id="contact-message"
-          name="message"
-          required
-          rows={4}
-          className={styles.formField}
-        />
+        <textarea id="contact-message" name="message" required rows={4} className={styles.formField} />
       </div>
-      <button
-        type="submit"
-        disabled={status === "submitting"}
-        className={styles.formButton}
-      >
+      <button type="submit" disabled={status === "submitting"} className={styles.formButton}>
         {status === "submitting" ? "Sending…" : "Send"}
       </button>
       {status === "success" && (

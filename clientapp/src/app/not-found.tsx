@@ -1,7 +1,6 @@
-import React from "react";
-import Link from "next/link";
-import { routes } from "@/utils/routes";
 import { Panel } from "@/components/Panel";
+import { routes } from "@/utils/routes";
+import Link from "next/link";
 
 export default function NotFoundPage() {
   return (

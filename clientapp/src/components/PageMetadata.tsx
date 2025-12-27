@@ -1,10 +1,7 @@
 "use client";
 
+import { type PageMetadataUpdate, usePageMetadata } from "@/components/PageMetadataProvider";
 import { useEffect } from "react";
-import {
-  type PageMetadataUpdate,
-  usePageMetadata,
-} from "@/components/PageMetadataProvider";
 
 export function PageMetadata({ title, subtitle, description }: PageMetadataUpdate) {
   const { updateMetadata } = usePageMetadata();
