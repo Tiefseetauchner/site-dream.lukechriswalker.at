@@ -123,7 +123,7 @@ export default async function BookDetailPage({ params }: BookPageProps) {
                 priority
               />
             ) : (
-              <p className="text-sm italic text-slate-200">Cover coming soon.</p>
+              <p className="text-sm italic text-stone-200">Cover coming soon.</p>
             )}
           </Panel>
           <Panel>
@@ -132,10 +132,10 @@ export default async function BookDetailPage({ params }: BookPageProps) {
                 {book.title}
               </h2>
             )}
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-300">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-stone-300">
               <Link
                 href={routes.books}
-                className="underline underline-offset-4 hover:text-slate-50"
+                className="underline underline-offset-4 hover:text-stone-50"
               >
                 Dreams series
               </Link>
@@ -145,16 +145,16 @@ export default async function BookDetailPage({ params }: BookPageProps) {
             </p>
             {authors.length > 0 && (
               <div className="space-y-2">
-                <h3 className="text-lg font-semibold uppercase tracking-widest text-slate-200">
+                <h3 className="text-lg font-semibold uppercase tracking-widest text-stone-200">
                   Author{authors.length > 1 ? "s" : ""}
                 </h3>
-                <ul className="space-y-1 text-base text-slate-100">
+                <ul className="space-y-1 text-base text-stone-100">
                   {authors.map((author) => (
                     <li key={author.slug ?? author.name}>
                       {author.slug ? (
                         <Link
                           href={routes.author(author.slug)}
-                          className="underline underline-offset-4 hover:text-slate-50"
+                          className="underline underline-offset-4 hover:text-stone-50"
                         >
                           {author.name}
                         </Link>
@@ -168,19 +168,19 @@ export default async function BookDetailPage({ params }: BookPageProps) {
             )}
             {book.content_warnings && (
               <details
-                className="group rounded-lg border border-white/10 bg-white/5 p-3"
+                className="group rounded-lg border border-white/10 bg-black/30 p-3"
               >
-                <summary className="cursor-pointer text-lg font-semibold uppercase tracking-widest text-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80">
+                <summary className="cursor-pointer text-lg font-semibold uppercase tracking-widest text-stone-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-ember-400)]">
                   Content Warnings
                 </summary>
-                <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-slate-100">
+                <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-stone-100">
                   {book.content_warnings}
                 </p>
               </details>
             )}
             {actions.length > 0 && (
               <div className="space-y-3">
-                <h3 className="text-lg font-semibold uppercase tracking-widest text-slate-200">
+                <h3 className="text-lg font-semibold uppercase tracking-widest text-stone-200">
                   Read Yourself!
                 </h3>
                 <div className="flex flex-wrap gap-3">
@@ -192,8 +192,8 @@ export default async function BookDetailPage({ params }: BookPageProps) {
                       rel="noreferrer noopener"
                       className={
                         action.variant === "primary"
-                          ? "rounded-md bg-white/90 px-4 py-2 text-sm font-semibold uppercase tracking-widest text-slate-900 shadow-sm transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-                          : "rounded-md border border-white/40 px-4 py-2 text-sm font-semibold uppercase tracking-widest text-white transition hover:border-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                          ? "rounded-md bg-[color:var(--color-bone-100)] px-4 py-2 text-sm font-semibold uppercase tracking-widest text-[color:var(--color-ink-950)] shadow-sm transition hover:bg-[color:var(--color-bone-200)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-ember-400)]"
+                          : "rounded-md border border-white/30 px-4 py-2 text-sm font-semibold uppercase tracking-widest text-stone-100 transition hover:border-[color:var(--color-ember-400)] hover:text-stone-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-ember-400)]"
                       }
                     >
                       {action.label}
@@ -207,7 +207,7 @@ export default async function BookDetailPage({ params }: BookPageProps) {
         {book.description && (
           <Panel>
             <h3 className="text-2xl font-semibold text-white">Description</h3>
-            <div className="max-w-2xl text-base leading-relaxed text-slate-100">
+            <div className="max-w-2xl text-base leading-relaxed text-stone-100">
               <BlocksRenderer content={book.description as BlocksContent} />
             </div>
           </Panel>

@@ -6,6 +6,7 @@ import { client } from "@/utils/strapiClient";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { SingleTypeResponse } from "../../types/types";
 import { routes } from "@/utils/routes";
+import { tt2020 } from "@/fonts/fonts";
 
 const pageMetadata = getPageMetadataById("home");
 export const metadata = toNextMetadata(pageMetadata);
@@ -25,7 +26,7 @@ export default async function Home() {
             <div>
               <Link
                 href={routes.book("dream")}
-                className={styles.homeCta}
+                className={`${tt2020.className} ${styles.homeCta}`}
               >
                 Start with Dream
               </Link>

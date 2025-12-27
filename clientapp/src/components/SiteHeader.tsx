@@ -2,7 +2,7 @@
 
 import NavMenu from "@/components/NavMenu";
 import { usePageMetadata } from "@/components/PageMetadataProvider";
-import { cormorantSC } from "@/fonts/fonts";
+import { cormorantSC, tt2020 } from "@/fonts/fonts";
 import styles from "@/styles/retro.module.css";
 
 export function SiteHeader() {
@@ -14,11 +14,11 @@ export function SiteHeader() {
       <div className="flex flex-row gap-6 md:flex-col md:items-center md:justify-between">
         <div className="space-y-2">
           <h1
-            className={`${cormorantSC.className} ${styles.title} text-4xl font-semibold md:text-5xl`}
+            className={`${tt2020.className} ${styles.title} text-3xl font-semibold md:text-5xl`}
           >
             {title}
           </h1>
-          <p className={`${styles.tagline} text-sm font-medium tracking-[0.2em]`}>
+          <p className={`${cormorantSC.className} ${styles.tagline} text-xs font-medium tracking-[0.3em]`}>
             {subtitle}
           </p>
         </div>

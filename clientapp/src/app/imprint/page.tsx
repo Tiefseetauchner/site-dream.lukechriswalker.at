@@ -25,7 +25,7 @@ export default async function ImprintPage() {
       {contact.imprint ? (
         <BlocksRenderer content={contact.imprint as BlocksContent} />
       ) : (
-        <p className="text-sm text-slate-100">
+        <p className="text-sm text-stone-100">
           Imprint information will be published here soon.
         </p>
       )}

@@ -36,18 +36,18 @@ export default async function ContactPage() {
         <div className="space-y-6">
           <div className="space-y-2">
             <h2 className="text-xl font-semibold text-white">Contact Data</h2>
-            <p className="text-sm text-slate-100">
+            <p className="text-sm text-stone-100">
               For all inquiries, reach out via the channels below or send a direct message through the form.
             </p>
-            <ul className="space-y-1 text-sm text-slate-100">
+            <ul className="space-y-1 text-sm text-stone-100">
               {contact.contact_email && (
                 <li>
-                  <span className="font-semibold uppercase tracking-widest text-slate-200">
+                  <span className="font-semibold uppercase tracking-widest text-stone-200">
                     Email:
                   </span>{" "}
                   <a
                     href={`mailto:${contact.contact_email}`}
-                    className="underline underline-offset-4 hover:text-slate-50"
+                    className="underline underline-offset-4 hover:text-stone-50"
                   >
                     {contact.contact_email}
                   </a>
@@ -59,7 +59,7 @@ export default async function ContactPage() {
                     href={link.link}
                     target="_blank"
                     rel="noreferrer noopener"
-                    className="underline underline-offset-4 hover:text-slate-50"
+                    className="underline underline-offset-4 hover:text-stone-50"
                   >
                     {link.display_name ?? link.link}
                   </a>

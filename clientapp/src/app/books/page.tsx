@@ -29,7 +29,7 @@ export default async function BooksPage() {
 
   return (
     <div className="space-y-6">
-      <p className="text-sm text-slate-200">
+      <p className="text-sm text-stone-200">
         Select a book to view details and reading options.
       </p>
       <BooksSwiper books={books} />

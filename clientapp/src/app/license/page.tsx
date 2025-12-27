@@ -8,23 +8,23 @@ export const metadata = toNextMetadata(pageMetadata);
 
 export default function LicensePage() {
   return (
-    <main className="max-w-3xl mx-auto px-4 py-8">
+    <main className="mx-auto max-w-3xl px-4 py-8 text-stone-100">
       <div className="space-y-8">
         <section>
-          <p className="text-lg ">
+          <p className="text-lg">
             While it may seem simple to license a book series, I decided to make it
             all but. The licensing is complex and interwoven, and I need and want to
             explain it as much detail as possible.
           </p>
         </section>
         <section>
-          <h2 id="source" className="text-2xl font-semibold mb-2">The source code of this website and Licensing thereof</h2>
-          <p className="">
+          <h2 id="source" className="mb-2 text-2xl font-semibold">The source code of this website and Licensing thereof</h2>
+          <p>
             This is by far the simplest part. This website&apos;s source code, available
             on{" "}
             <a
               href="https://github.com/Tiefseetauchner/site-dream.lukechriswalker.at"
-              className="text-blue-600 underline"
+              className="text-amber-200 underline underline-offset-4 hover:text-amber-100"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -33,7 +33,7 @@ export default function LicensePage() {
             , is licensed under the MIT license. The license is available at{" "}
             <a
               href="https://github.com/Tiefseetauchner/site-dream.lukechriswalker.at/blob/main/LICENSE"
-              className="text-blue-600 underline"
+              className="text-amber-200 underline underline-offset-4 hover:text-amber-100"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -69,15 +69,15 @@ export default function LicensePage() {
           </Panel>
         </section>
         <section>
-          <h2 id="contents" className="text-2xl font-semibold mb-2">
+          <h2 id="contents" className="mb-2 text-2xl font-semibold">
             The <em>contents</em> of this website and images therein
           </h2>
-          <p className="">
+          <p>
             The &ldquot;contents&rdquot; of this website are defined as the text, images, and
             other media not directly included in the source code. This includes but
             is not limited to:
           </p>
-          <ul className="list-disc list-inside ml-4 ">
+          <ul className="ml-4 list-disc list-inside">
             <li>
               The texts displayed on this website which are loaded from an
               external source (e.g. a content management system);
@@ -94,15 +94,15 @@ export default function LicensePage() {
           <p className="font-medium">Copyright &copy; 2025 Lena Tauchner.</p>
         </section>
         <section>
-          <h2 id="works" className="text-2xl font-semibold mb-2">Works displayed on this website</h2>
-          <p className="">
+          <h2 id="works" className="mb-2 text-2xl font-semibold">Works displayed on this website</h2>
+          <p>
             The works displayed but not included on the website may be distributed
             under a various host of licenses. Among these licenses are the Creative
             Commons licenses, specifically the CC BY-NC-ND 4.0 international
             license. The text can be found at{" "}
             <a
               href="https://creativecommons.org/licenses/by-nc-nd/4.0/"
-              className="text-blue-600 underline"
+              className="text-amber-200 underline underline-offset-4 hover:text-amber-100"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -115,7 +115,7 @@ export default function LicensePage() {
             explicitly granted - derivative works are not allowed. This includes but
             is not limited to
           </p>
-          <ul className="list-disc list-inside ml-4 ">
+          <ul className="ml-4 list-disc list-inside">
             <li>modified copies of the works;</li>
             <li>fan art;</li>
             <li>and fan fiction.</li>
@@ -125,27 +125,27 @@ export default function LicensePage() {
             license allows, you must obtain permission from the rightsholder. This
             is usually the author of the work, who you can contact directly or via
             the website&apos;s publisher (see{" "}
-            <Link href={routes.contact} className="text-blue-600 underline">the contact page</Link>
+            <Link href={routes.contact} className="text-amber-200 underline underline-offset-4 hover:text-amber-100">the contact page</Link>
             ).
             <br /> If you are unsure whether your intended use is permitted, please
             don&apos;t hesitate to reach out!
           </p>
         </section>
         <section>
-          <h2 id="software" className="text-2xl font-semibold mb-2">Third party components and software</h2>
-          <h3 className="text-xl font-semibold mt-4 mb-2">Font Software</h3>
-          <p className="">
+          <h2 id="software" className="mb-2 text-2xl font-semibold">Third party components and software</h2>
+          <h3 className="mb-2 mt-4 text-xl font-semibold">Font Software</h3>
+          <p>
             This website uses externally licensed font software that is bundled with
             the webpage. The following fonts are used:
           </p>
-          <ul className="list-disc list-inside ml-4 ">
+          <ul className="ml-4 list-disc list-inside">
             <li>
               <span className="font-medium">Cormorant:</span>
               <br />
               This font software is licensed under the{" "}
               <a
                 href="/fonts/LICENSE.Cormorant.txt"
-                className="text-blue-600 underline"
+                className="text-amber-200 underline underline-offset-4 hover:text-amber-100"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -154,7 +154,7 @@ export default function LicensePage() {
               .{" "}
               <a
                 href="https://github.com/CatharsisFonts/Cormorant"
-                className="text-blue-600 underline"
+                className="text-amber-200 underline underline-offset-4 hover:text-amber-100"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -167,7 +167,7 @@ export default function LicensePage() {
               This font software is licensed under the{" "}
               <a
                 href="/fonts/LICENSE.TT2020.txt"
-                className="text-blue-600 underline"
+                className="text-amber-200 underline underline-offset-4 hover:text-amber-100"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -176,7 +176,7 @@ export default function LicensePage() {
               .{" "}
               <a
                 href="https://github.com/ctrlcctrlv/TT2020"
-                className="text-blue-600 underline"
+                className="text-amber-200 underline underline-offset-4 hover:text-amber-100"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -184,12 +184,12 @@ export default function LicensePage() {
               </a>
             </li>
           </ul>
-          <h3 className="text-xl font-semibold mt-4 mb-2">Software components</h3>
-          <p className="">
+          <h3 className="mb-2 mt-4 text-xl font-semibold">Software components</h3>
+          <p>
             Please refer to{" "}
             <a
               href="/third-party-licenses.txt"
-              className="text-blue-600 underline"
+              className="text-amber-200 underline underline-offset-4 hover:text-amber-100"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -202,4 +202,3 @@ export default function LicensePage() {
     </main>
   );
 }
-

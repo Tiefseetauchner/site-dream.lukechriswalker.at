@@ -92,7 +92,7 @@ export default async function CharacterDetailPage({ params }: CharacterPageProps
       <div className="space-y-8">
         {character.blurb && (
           <Panel>
-            <p className="text-center text-lg italic text-slate-200">{character.blurb}</p>
+            <p className="text-center text-lg italic text-stone-200">{character.blurb}</p>
           </Panel>
         )}
         <div className="grid gap-8 lg:grid-cols-[minmax(0,280px)_1fr]">
@@ -107,22 +107,22 @@ export default async function CharacterDetailPage({ params }: CharacterPageProps
                   className="mx-auto w-full max-w-xs rounded-xl shadow-2xl"
                 />
               ) : (
-                <p className="text-sm italic text-slate-200">Portrait coming soon.</p>
+                <p className="text-sm italic text-stone-200">Portrait coming soon.</p>
               )}
               {formattedBirthday && (
-                <dl className="space-y-1 text-sm text-slate-100">
-                  <dt className="font-semibold uppercase tracking-widest text-slate-200">Born</dt>
+                <dl className="space-y-1 text-sm text-stone-100">
+                  <dt className="font-semibold uppercase tracking-widest text-stone-200">Born</dt>
                   <dd>{formattedBirthday}</dd>
                 </dl>
               )}
               {books.length > 0 && (
                 <div className="space-y-2">
-                  <h3 className="text-lg font-semibold uppercase tracking-widest text-slate-200">Appears in</h3>
-                  <ul className="space-y-1 text-sm text-slate-100">
+                  <h3 className="text-lg font-semibold uppercase tracking-widest text-stone-200">Appears in</h3>
+                  <ul className="space-y-1 text-sm text-stone-100">
                     {books.map((book) => (
                       <li key={book.id ?? book.slug ?? book.title}>
                         {book.slug ? (
-                          <Link href={routes.book(book.slug)} className="underline underline-offset-4 hover:text-slate-50">
+                          <Link href={routes.book(book.slug)} className="underline underline-offset-4 hover:text-stone-50">
                             {book.title}
                           </Link>
                         ) : (

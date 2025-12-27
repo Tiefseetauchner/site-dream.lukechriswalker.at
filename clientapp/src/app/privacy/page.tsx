@@ -32,12 +32,12 @@ export default async function PrivacyPage() {
         {privacy.content ? (
           <BlocksRenderer content={privacy.content as BlocksContent} />
         ) : (
-          <p className="text-sm text-slate-100">
+          <p className="text-sm text-stone-100">
             The privacy policy will be available soon. Please check back later.
           </p>
         )}
         {formattedUpdated && (
-          <p className="text-sm font-semibold uppercase tracking-widest text-slate-200">
+          <p className="text-sm font-semibold uppercase tracking-widest text-stone-200">
             Last updated: {formattedUpdated}
           </p>
         )}

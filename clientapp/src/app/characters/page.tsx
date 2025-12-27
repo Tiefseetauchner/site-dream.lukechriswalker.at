@@ -25,7 +25,7 @@ export default async function CharactersPage() {
   return (
     <div className="space-y-8">
       <Panel>
-        <p className="text-center text-lg italic text-slate-200">
+        <p className="text-center text-lg italic text-stone-200">
           &ldquo;The scene isn&apos;t just kink &mdash; it&apos;s people, Sandra.&rdquo; &mdash; Christoph
         </p>
       </Panel>
@@ -46,7 +46,7 @@ export default async function CharactersPage() {
                 </h2>
               )}
               {character.blurb && (
-                <p className="text-sm italic leading-relaxed text-slate-200">
+                <p className="text-sm italic leading-relaxed text-stone-200">
                   {character.blurb}
                 </p>
               )}

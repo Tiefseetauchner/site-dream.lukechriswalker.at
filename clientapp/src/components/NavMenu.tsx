@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import styles from "@/styles/retro.module.css";
+import { tt2020 } from "@/fonts/fonts";
 import { routes } from "@/utils/routes";
 import { faBars } from "@fortawesome/free-solid-svg-icons/faBars";
 import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
@@ -38,22 +39,19 @@ export default function NavMenu() {
         <li key={link.label} className="relative group">
           <a
             href={link.path}
-            className={`block px-4 py-2 rounded font-semibold uppercase text-xs tracking-widest transition-colors ${isMobile
-                ? "bg-retro-500 hover:bg-retro-600 text-white"
-                : "bg-retro-800 hover:bg-retro-600 text-white"
-              } focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-retro-400`}
+            className={`${tt2020.className} ${styles.navLink} ${isMobile ? styles.navLinkMobile : ""}`}
             aria-haspopup="true"
             aria-expanded="false"
           >
             {link.label}
           </a>
           {!isMobile && (
-            <div className="absolute left-0 top-full z-50 min-w-[10rem] bg-retro-900 border border-retro-600 rounded shadow-lg opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 pointer-events-none group-hover:pointer-events-auto group-focus-within:pointer-events-auto transition-opacity">
+            <div className={`${styles.navDropdown} absolute left-0 top-full z-50 min-w-[10rem] rounded opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100 pointer-events-none group-hover:pointer-events-auto group-focus-within:pointer-events-auto`}>
               <ul>{renderNavLinks(link.routes)}</ul>
             </div>
           )}
           {isMobile && (
-            <ul className="ml-4 mt-2 border-l border-retro-400 pl-2">
+            <ul className={`${styles.navDivider} ml-4 mt-2 pl-2`}>
               {renderNavLinks(link.routes, true)}
             </ul>
           )}
@@ -62,10 +60,7 @@ export default function NavMenu() {
         <li key={link.label}>
           <a
             href={link.path}
-            className={`block px-4 py-2 rounded font-semibold uppercase text-xs tracking-widest transition-colors ${isMobile
-                ? "bg-retro-500 hover:bg-retro-600 text-white"
-                : "bg-retro-800 hover:bg-retro-600 text-white"
-              } focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-retro-400`}
+            className={`${tt2020.className} ${styles.navLink} ${isMobile ? styles.navLinkMobile : ""}`}
           >
             {link.label}
           </a>
@@ -84,7 +79,7 @@ export default function NavMenu() {
       <nav className="md:hidden z-50">
         <button
           type="button"
-          className={`${styles.navToggle} flex items-center gap-2 rounded px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-colors bg-retro-800 hover:bg-retro-600 text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-retro-400`}
+          className={`${tt2020.className} ${styles.navToggle} flex items-center gap-2 rounded px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-colors`}
           onClick={() => setOpen((prev) => !prev)}
           aria-expanded={open}
           aria-controls="site-nav"
@@ -97,15 +92,16 @@ export default function NavMenu() {
       {/* Mobile Nav Overlay */}
       {open && (
         <div
-          className="fixed inset-0 z-40 bg-black bg-opacity-40 transition-opacity duration-300"
+          className={`${styles.navOverlay} fixed inset-0 z-40 transition-opacity duration-300`}
           onClick={() => setOpen(false)}
           aria-hidden="true"
         />
       )}
       {/* Mobile Nav Drawer */}
       <div
-        className={`fixed top-0 right-0 h-full w-64 bg-retro-500 shadow-lg z-50 transform transition-transform duration-300 ${open ? "translate-x-0" : "translate-x-full"
+        className={`${styles.navDrawer} fixed top-0 right-0 z-50 h-full w-64 transform transition-transform duration-300 ${open ? "translate-x-0" : "translate-x-full"
           }`}
+        id="site-nav"
         style={{ pointerEvents: open ? "auto" : "none" }}
         aria-hidden={!open}
       >

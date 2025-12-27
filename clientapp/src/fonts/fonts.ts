@@ -39,3 +39,18 @@ export const cormorantSC = localFont({
     },
   ],
 });
+
+export const tt2020 = localFont({
+  src: [
+    {
+      path: "../fonts/TT2020StyleE-Regular.woff2",
+      weight: "normal",
+      style: "normal",
+    },
+    {
+      path: "../fonts/TT2020StyleE-Italic.woff2",
+      weight: "normal",
+      style: "italic",
+    },
+  ],
+});

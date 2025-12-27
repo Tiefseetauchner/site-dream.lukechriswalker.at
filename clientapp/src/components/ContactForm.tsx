@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import styles from "@/styles/retro.module.css";
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
@@ -43,7 +44,7 @@ export function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-1">
-        <label className="text-sm font-semibold uppercase tracking-widest text-slate-200" htmlFor="contact-name">
+        <label className={`${styles.formLabel} text-sm font-semibold uppercase`} htmlFor="contact-name">
           Name
         </label>
         <input
@@ -51,11 +52,11 @@ export function ContactForm() {
           name="name"
           type="text"
           required
-          className="w-full rounded-md border border-white/10 bg-white/90 px-3 py-2 text-slate-900 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-700"
+          className={styles.formField}
         />
       </div>
       <div className="space-y-1">
-        <label className="text-sm font-semibold uppercase tracking-widest text-slate-200" htmlFor="contact-email">
+        <label className={`${styles.formLabel} text-sm font-semibold uppercase`} htmlFor="contact-email">
           Email address
         </label>
         <input
@@ -63,11 +64,11 @@ export function ContactForm() {
           name="email"
           type="email"
           required
-          className="w-full rounded-md border border-white/10 bg-white/90 px-3 py-2 text-slate-900 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-700"
+          className={styles.formField}
         />
       </div>
       <div className="space-y-1">
-        <label className="text-sm font-semibold uppercase tracking-widest text-slate-200" htmlFor="contact-message">
+        <label className={`${styles.formLabel} text-sm font-semibold uppercase`} htmlFor="contact-message">
           Message
         </label>
         <textarea
@@ -75,23 +76,23 @@ export function ContactForm() {
           name="message"
           required
           rows={4}
-          className="w-full rounded-md border border-white/10 bg-white/90 px-3 py-2 text-slate-900 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-700"
+          className={styles.formField}
         />
       </div>
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="w-full rounded-md bg-slate-800 px-4 py-2 text-sm font-semibold uppercase tracking-widest text-white transition hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-70"
+        className={styles.formButton}
       >
         {status === "submitting" ? "Sending…" : "Send"}
       </button>
       {status === "success" && (
-        <p className="text-sm font-medium text-emerald-200" role="status">
+        <p className={`${styles.formStatusSuccess} text-sm font-medium`} role="status">
           Thank you! Your message has been sent.
         </p>
       )}
       {status === "error" && errorMessage && (
-        <p className="text-sm font-medium text-rose-200" role="alert">
+        <p className={`${styles.formStatusError} text-sm font-medium`} role="alert">
           {errorMessage}
         </p>
       )}
